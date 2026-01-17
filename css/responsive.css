@@ -425,14 +425,14 @@
 
     /* Animatie voor Desktop - VOLLEDIGE BREEDTE EN ZUIVERE LOOP */
     .animatie {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        overflow: hidden;
-    }
+    width: 100%;
+    position: relative;
+    left: 0;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: hidden;
+}
+
 
     /* Zorg voor meer kopieën voor naadloze doorloop */
     .animatie-track {
