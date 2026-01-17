@@ -262,19 +262,6 @@ Animatie
     }
 }
 
-video::-webkit-media-controls {
-  display: none !important;
-}
-
-video::before,
-video::after {
-  display: none !important;
-}
-
-.welcome-animation * {
-  pointer-events: none;
-}
-
 /*==========================
 EINDE VAN DE INTRO PAGINA
 ============================*/
