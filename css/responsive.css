@@ -1,0 +1,603 @@
+/* Responsive CSS - Alleen voor telefoon en iPad */
+
+/* =========================
+   TELEFOON (max-width: 768px)
+========================= */
+@media (max-width: 768px) {
+    /* Body aanpassingen */
+    body {
+        padding-top: 70px;
+        margin-bottom: 100px;
+        overflow-x: hidden;
+    }
+
+    /* Prevent scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    /* Navbar voor telefoon */
+    .navbar {
+        height: 70px;
+        flex-direction: column;
+        align-items: stretch;
+        border-bottom: 2px solid white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1001;
+        transition: transform 0.35s ease;
+    }
+
+    .navbar.navbar--hidden {
+        transform: translateY(-100%);
+        border-bottom: none !important;
+    }
+
+    .navbar > div {
+        flex: none;
+        padding: 10px;
+    }
+
+    .nav-links {
+        justify-content: space-between;
+        padding: 0 15px;
+        width: 100%;
+        order: 1;
+        position: relative;
+    }
+
+    .nav-logo img {
+        height: 50px;
+    }
+
+    .home-button {
+        font-size: 14px;
+        margin-left: 10px;
+        text-align: center;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+    }
+
+    /* Hide middle and right nav on mobile by default */
+    .nav-midden,
+    .nav-rechts {
+        display: none !important;
+    }
+
+    /* Mobile menu button */
+    .mobile-menu-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        cursor: pointer;
+        margin-left: auto;
+        z-index: 1002;
+    }
+
+    .mobile-menu-btn span {
+        height: 3px;
+        width: 100%;
+        background-color: white;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Overlay menu */
+    .mobile-overlay {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: rgba(18, 18, 18, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        overflow: hidden;
+        transition: height 0.4s ease;
+        border-top: 0 solid #d4af37;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-overlay.active {
+        height: calc(100vh - 70px);
+        border-top-width: 1px;
+        border-top-color: #d4af37;
+    }
+
+    .mobile-overlay-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 40px 20px;
+        opacity: 0;
+        transition: opacity 0.3s ease 0.2s;
+    }
+
+    .mobile-overlay.active .mobile-overlay-content {
+        opacity: 1;
+    }
+
+    .mobile-overlay a {
+        color: white;
+        font-size: 28px;
+        text-decoration: none;
+        margin: 25px 0;
+        padding: 15px 30px;
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+
+    .mobile-overlay a:hover {
+        color: #d4af37;
+        border-color: #d4af37;
+        transform: translateY(-3px);
+    }
+
+    /* Main page voor telefoon */
+    .logo-block {
+        height: 200px;
+        padding: 20px;
+    }
+
+    .welcome-logo {
+        height: auto;
+        max-height: 150px;
+        width: auto;
+        max-width: 100%;
+    }
+
+    .text1 {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .text1 > div {
+        height: auto;
+        min-height: 400px;
+        margin-bottom: 30px;
+    }
+
+    .textbox-left,
+    .textbox-right {
+        padding: 30px 20px;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .textbox-left p,
+    .textbox-right p {
+        width: 100%;
+        font-size: 14px;
+        padding-bottom: 15px;
+    }
+
+    .left-header,
+    .right-header {
+        padding-bottom: 25px;
+        font-size: 22px;
+    }
+
+    /* Animatie voor telefoon */
+    .animatie-track span {
+        font-size: 14px;
+        padding-right: 20px;
+    }
+
+    /* Service page voor telefoon */
+    .info1,
+    .info2 {
+        flex-direction: column;
+        height: auto;
+        padding: 40px 20px;
+    }
+
+    .info2 {
+        flex-direction: column;
+    }
+
+    .info1-picture,
+    .info2-picture {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .service-image1,
+    .service-image2 {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: cover;
+    }
+
+    .service-image2 {
+        margin-left: 0;
+    }
+
+    .info1-text,
+    .info2-text {
+        width: 100%;
+        line-height: 1.6;
+        padding: 0;
+    }
+
+    .info1-text p,
+    .info2-text p {
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    /* Contact page voor telefoon */
+    .socials {
+        flex-direction: column;
+        height: auto;
+        padding: 0 20px;
+    }
+
+    .left-socials,
+    .right-socials {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .Instagram,
+    .LinkedIn {
+        width: 100%;
+        height: 250px;
+    }
+
+    .insta-main p,
+    .LinkedIn-main p {
+        padding-top: 40px;
+        font-size: 20px;
+    }
+
+    .mail-box {
+        padding: 0 20px;
+    }
+
+    .mail {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .mail h4 {
+        font-size: 20px;
+    }
+
+    .mail p {
+        font-size: 16px;
+    }
+}
+
+/* =========================
+   TABLET/iPad (769px - 1024px)
+========================= */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Hide mobile overlay and button on tablet */
+    .mobile-menu-btn,
+    .mobile-overlay {
+        display: none !important;
+    }
+
+    /* Navbar voor tablet - toon originele rechtskant */
+    .navbar {
+        height: 90px;
+    }
+
+    .nav-logo img {
+        height: 70px;
+    }
+
+    .home-button {
+        font-size: 16px;
+        margin-left: 15px;
+    }
+
+    .Service-button,
+    .Contact-button {
+        margin-right: 20px;
+        font-size: 17px;
+    }
+
+    /* Main page voor tablet */
+    .logo-block {
+        height: 300px;
+    }
+
+    .text1 > div {
+        height: 450px;
+    }
+
+    .textbox-left p,
+    .textbox-right p {
+        width: 70%;
+        font-size: 14px;
+    }
+
+    /* Animatie voor MacBook/Computer - VOLLEDIGE BREEDTE EN ZUIVERE LOOP */
+    .animatie {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        overflow: hidden;
+    }
+
+    /* Zorg voor meer kopieën voor naadloze doorloop */
+    .animatie-track {
+        display: inline-flex;
+        width: max-content;
+        animation: marquee 15s linear infinite;
+    }
+
+    .animatie-track span {
+        padding: 15px 40px;
+        font-size: 18px;
+        letter-spacing: 1px;
+        border-top: 1px solid #d4af37;
+        border-bottom: 1px solid #d4af37;
+        color: white;
+    }
+
+    /* Service page voor tablet */
+    .info1,
+    .info2 {
+        padding: 80px 40px;
+        height: 500px;
+    }
+
+    .info1-text h2,
+    .info2-text h2 {
+        font-size: 24px;
+    }
+
+    .info1-text p,
+    .info2-text p {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    /* Contact page voor tablet - aangepast voor .LinkedIn-main en tekst centreren */
+    .Instagram,
+    .LinkedIn {
+        width: 70%;
+        height: 70%;
+    }
+
+    .insta-main p,
+    .LinkedIn-main p {
+        padding-top: 60px;
+        font-size: 24px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    .mail {
+        width: 70%;
+    }
+}
+
+/* =========================
+   DESKTOP (1025px - 1439px)
+========================= */
+@media (min-width: 1025px) and (max-width: 1439px) {
+    /* Hide mobile overlay and button on desktop */
+    .mobile-menu-btn,
+    .mobile-overlay {
+        display: none !important;
+    }
+
+    /* Animatie voor Desktop - VOLLEDIGE BREEDTE EN ZUIVERE LOOP */
+    .animatie {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        overflow: hidden;
+    }
+
+    /* Zorg voor meer kopieën voor naadloze doorloop */
+    .animatie-track {
+        display: inline-flex;
+        width: max-content;
+        animation: marquee 15s linear infinite;
+    }
+
+    .animatie-track span {
+        padding: 15px 40px;
+        font-size: 18px;
+        letter-spacing: 1px;
+        border-top: 1px solid #d4af37;
+        border-bottom: 1px solid #d4af37;
+        color: white;
+    }
+
+    /* Contact page voor Desktop - tekst perfect centreren */
+    .insta-main p,
+    .LinkedIn-main p {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding-top: 0;
+    }
+
+    /* Zorg dat de logo-box niet te veel ruimte inneemt */
+    .Logo-Insta-box,
+    .Logo-LinkedIn-box {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding-bottom: 20px;
+    }
+}
+
+/* =========================
+   ULTRABREED (min-width: 1440px)
+========================= */
+@media (min-width: 1440px) {
+    /* Container beperken voor ultrawide */
+    body {
+        max-width: 1920px;
+        margin: 0 auto;
+    }
+
+    .navbar {
+        max-width: 1920px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+
+    .navbar--hidden {
+        transform: translate(-50%, -100%);
+        border-bottom: none !important;
+    }
+
+    /* Animatie voor ultrawide - GECENTREERDE KORTERE ANIMATIE */
+    .animatie {
+        width: 1200px; /* Vaste breedte voor kortere animatie */
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .animatie-track {
+        display: inline-flex;
+        width: max-content;
+        animation: marquee 13s linear infinite; /* Behoud originele snelheid */
+    }
+
+    .animatie-track span {
+        padding: 15px 40px;
+        font-size: 18px;
+        letter-spacing: 1px;
+        border-top: 1px solid #d4af37;
+        border-bottom: 1px solid #d4af37;
+        color: white;
+    }
+
+    /* Minder kopieën voor kortere animatie */
+    .animatie-track span:nth-child(n+4) {
+        display: none;
+    }
+
+    /* Hide mobile overlay and button on ultrawide */
+    .mobile-menu-btn,
+    .mobile-overlay {
+        display: none !important;
+    }
+
+    /* Contact page voor ultrawide - tekst perfect centreren */
+    .insta-main p,
+    .LinkedIn-main p {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding-top: 0;
+        font-size: 28px;
+    }
+
+    .Instagram,
+    .LinkedIn {
+        width: 60%;
+        height: 60%;
+    }
+}
+
+/* =========================
+   LANDSCAPE MODE (voor telefoons in landscape)
+========================= */
+@media (max-width: 768px) and (orientation: landscape) {
+    .navbar {
+        height: 60px;
+    }
+
+    .mobile-overlay {
+        top: 60px;
+        height: 0;
+        border-top: 0 solid #d4af37;
+    }
+
+    .mobile-overlay.active {
+        height: calc(100vh - 60px);
+        border-top-width: 1px;
+        border-top-color: #d4af37;
+    }
+
+    .nav-logo img {
+        height: 40px;
+    }
+
+    .logo-block {
+        height: 150px;
+    }
+
+    .text1 > div {
+        min-height: 350px;
+    }
+
+    .Instagram,
+    .LinkedIn {
+        height: 200px;
+    }
+
+    .mobile-overlay a {
+        font-size: 22px;
+        margin: 15px 0;
+        padding: 10px 20px;
+    }
+}
+
+/* Hide mobile menu on desktop */
+@media (min-width: 769px) {
+    .mobile-menu-btn,
+    .mobile-overlay {
+        display: none !important;
+    }
+}
