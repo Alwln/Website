@@ -424,7 +424,7 @@
     }
 
     /* Animatie voor Desktop - VOLLEDIGE BREEDTE EN ZUIVERE LOOP */
-    .animatie {
+   .animatie {
     width: 100%;
     position: relative;
     left: 0;
