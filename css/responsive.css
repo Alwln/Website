@@ -221,7 +221,7 @@
     }
 
     .info2 {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .info1-picture,
@@ -371,22 +371,49 @@
         color: white;
     }
 
-    /* Service page voor tablet */
+    /* Service page voor tablet - AANGEPAST VOOR STACKED LAYOUT */
     .info1,
     .info2 {
-        padding: 80px 40px;
-        height: 500px;
+        flex-direction: column;
+        height: auto;
+        padding: 60px 40px;
     }
 
-    .info1-text h2,
-    .info2-text h2 {
-        font-size: 24px;
+    .info2 {
+        flex-direction: column-reverse;
+    }
+
+    .info1-picture,
+    .info2-picture {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .service-image1,
+    .service-image2 {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+    }
+
+    .service-image2 {
+        margin-left: 0;
+    }
+
+    .info1-text,
+    .info2-text {
+        width: 100%;
+        line-height: 1.6;
+        padding: 0;
     }
 
     .info1-text p,
     .info2-text p {
+        margin-bottom: 15px;
         font-size: 16px;
-        line-height: 1.8;
+        line-height: 1.7;
+        max-width: 100%;
     }
 
     /* Contact page voor tablet - aangepast voor .LinkedIn-main en tekst centreren */
@@ -414,9 +441,9 @@
 }
 
 /* =========================
-   DESKTOP (1025px - 1439px)
+   DESKTOP (1025px - 1599px) - VERANDERD VAN 1439px NAAR 1599px
 ========================= */
-@media (min-width: 1025px) and (max-width: 1439px) {
+@media (min-width: 1025px) and (max-width: 1599px) {
     /* Hide mobile overlay and button on desktop */
     .mobile-menu-btn,
     .mobile-overlay {
@@ -424,15 +451,15 @@
     }
 
     /* Animatie voor Desktop - VOLLEDIGE BREEDTE EN ZUIVERE LOOP */
-   .animatie {
-    width: 100%;
-    position: relative;
-    left: 0;
-    margin-left: 0;
-    margin-right: 0;
-    overflow: hidden;
-}
-
+    .animatie {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        overflow: hidden;
+    }
 
     /* Zorg voor meer kopieën voor naadloze doorloop */
     .animatie-track {
@@ -474,9 +501,9 @@
 }
 
 /* =========================
-   ULTRABREED (min-width: 1440px)
+   ULTRABREED (min-width: 1600px) - VERANDERD VAN 1440px NAAR 1600px
 ========================= */
-@media (min-width: 1440px) {
+@media (min-width: 1600px) {
     /* Container beperken voor ultrawide */
     body {
         max-width: 1920px;
