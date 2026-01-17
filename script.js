@@ -1,6 +1,10 @@
 // Security & Protection Services - Overlay Mobile Menu
 console.log("Security & Protection Services loaded");
 
+const video = document.querySelector('.video1');
+  video.muted = true;
+  video.play().catch(() => {});
+
 (() => {
     // 🔒 Voorkom dubbel initialiseren
     if (window.__navbarInitialized) return;
