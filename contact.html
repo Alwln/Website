@@ -254,7 +254,7 @@ function checkRateLimit() {
     const now = Date.now();
     const raw = sessionStorage.getItem(RATE_KEY);
     const timestamps = raw ? JSON.parse(raw).filter(t => now - t < 600000) : [];
-    if (timestamps.length >= 3) return false;
+    if (timestamps.length >= 15) return false;
     timestamps.push(now);
     sessionStorage.setItem(RATE_KEY, JSON.stringify(timestamps));
     return true;
