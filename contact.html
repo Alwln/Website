@@ -11,7 +11,7 @@
                frame-src https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/;
                connect-src https://api.web3forms.com;
                img-src 'self' data:;">
-<title>Contact &mdash; AvdB Security &amp; Protection</title>
+<title>Contact - AvdB Security &amp; Protection</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="contact.css">
 <link rel="icon" type="image/png" href="images/Logo%20kopie.png">
@@ -215,7 +215,9 @@ mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => 
   document.body.style.overflow = '';
 }));
 
-const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.08 });
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+}), { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 const msgField = document.getElementById('message');
@@ -223,16 +225,21 @@ const charCount = document.getElementById('charCount');
 msgField.addEventListener('input', () => { charCount.textContent = msgField.value.length; });
 
 function sanitise(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;').replace(/\//g,'&#x2F;');
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
 const rules = {
-  first_name:   { test: v => /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF'\- ]{1,64}$/.test(v.trim()), msg: 'Please enter a valid first name (letters only, max 64 chars).' },
-  last_name:    { test: v => /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF'\- ]{1,64}$/.test(v.trim()), msg: 'Please enter a valid last name (letters only, max 64 chars).' },
+  first_name:   { test: v => /^[A-Za-zÀ-ÖØ-öø-ÿ' -]{1,64}$/.test(v.trim()), msg: 'Please enter a valid first name (letters only, max 64 chars).' },
+  last_name:    { test: v => /^[A-Za-zÀ-ÖØ-öø-ÿ' -]{1,64}$/.test(v.trim()), msg: 'Please enter a valid last name (letters only, max 64 chars).' },
   email:        { test: v => /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(v.trim()), msg: 'Please enter a valid email address.' },
-  phone:        { test: v => v.trim() === '' || /^[+\d\s\-()]{7,24}$/.test(v.trim()), msg: 'Phone number format invalid.' },
+  phone:        { test: v => v.trim() === '' || /^[+\d\s()-]{7,24}$/.test(v.trim()), msg: 'Phone number format invalid.' },
   organisation: { test: v => v.trim().length <= 128, msg: 'Organisation name must be 128 characters or less.' },
-  service:      { test: v => ['Penetration Testing','IT & Security Support','Website Development'].includes(v), msg: 'Please select a valid service.' },
+  service:      { test: v => ['Penetration Testing', 'IT & Security Support', 'Website Development'].includes(v), msg: 'Please select a valid service.' },
   message:      { test: v => v.trim().length >= 10 && v.trim().length <= 2000, msg: 'Message must be between 10 and 2000 characters.' }
 };
 
@@ -291,7 +298,10 @@ document.getElementById('contactForm').addEventListener('submit', async function
   for (const [field, rule] of Object.entries(rules)) {
     const el = form.elements[field];
     if (!el) continue;
-    if (!rule.test(el.value)) { showError(field, rule.msg); valid = false; }
+    if (!rule.test(el.value)) {
+      showError(field, rule.msg);
+      valid = false;
+    }
   }
   if (!form.elements['privacy'].checked) {
     showError('privacy', 'You must accept the Privacy Policy to continue.');
@@ -299,13 +309,13 @@ document.getElementById('contactForm').addEventListener('submit', async function
   }
   if (!valid) return;
 
-  const allowedFields = ['access_key','redirect','subject','from_name','first_name','last_name','email','phone','organisation','service','message'];
+  const allowedFields = ['access_key', 'redirect', 'subject', 'from_name', 'first_name', 'last_name', 'email', 'phone', 'organisation', 'service', 'message'];
   const payload = {};
   allowedFields.forEach(name => {
     const el = form.elements[name];
-    if (el) payload[name] = sanitise(el.value);
+    if (el) payload[name] = el.value;
   });
-  payload.replyto = sanitise(form.elements['email'].value);
+  payload.replyto = form.elements['email'].value;
 
   submitBtn.disabled = true;
   btnText.hidden = true;
@@ -316,7 +326,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
     payload['g-recaptcha-response'] = recaptchaToken;
   } catch(err) {
     setStatus('error', 'Security check failed. Please refresh the page and try again.');
-    submitBtn.disabled = false; btnText.hidden = false; btnLoader.hidden = true;
+    submitBtn.disabled = false;
+    btnText.hidden = false;
+    btnLoader.hidden = true;
     return;
   }
 
