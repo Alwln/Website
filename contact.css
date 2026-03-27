@@ -925,9 +925,3 @@ footer p span {
   .contact-form-wrap { padding: 28px 20px; }
   footer { padding: 20px; }
 }
-
-/* ─── Hide custom cursor on touch devices ─── */
-@media (pointer: coarse) {
-  .cursor, .cursor-ring { display: none; }
-  body { cursor: auto; }
-}
