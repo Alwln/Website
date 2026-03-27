@@ -1110,4 +1110,9 @@
     .about-stat-num { font-size: 36px; }
     .service-preview-card { padding: 36px 24px; }
     footer { padding: 20px; }
-  }
+  }-e 
+/* ─── Hide custom cursor on touch devices ─── */
+@media (pointer: coarse) {
+  .cursor, .cursor-ring { display: none; }
+  body { cursor: auto; }
+}
