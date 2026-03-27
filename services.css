@@ -778,4 +778,9 @@ footer p span {
     .cta-band { padding: 48px 20px; }
     .btn-gold { width: 100%; }
     footer { padding: 20px; }
-  }
+  }-e 
+/* ─── Hide custom cursor on touch devices ─── */
+@media (pointer: coarse) {
+  .cursor, .cursor-ring { display: none; }
+  body { cursor: auto; }
+}
