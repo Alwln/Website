@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact - AvdB Security &amp; Protection</title>
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src https://fonts.gstatic.com;
+               frame-src https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/;
+               connect-src https://api.web3forms.com https://www.google.com https://recaptcha.google.com;
+               img-src 'self' data:;">
+<title>Contact &mdash; AvdB Security &amp; Protection</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="contact.css">
 <link rel="icon" type="image/png" href="images/Logo%20kopie.png">
 <link rel="apple-touch-icon" href="images/Logo%20kopie.png">
+<script src="https://www.google.com/recaptcha/api.js?render=6LevGZksAAAAACjMJ--cXgRXwGCMwMsCL1SbYPOA"></script>
 </head>
 <body>
 
@@ -67,7 +76,7 @@
           </div>
           <div>
             <div class="contact-item-label">Email</div>
-            <div class="contact-item-value"><a href="mailto:alwinvdbildt01@gmail.com">alwinvdbildt01@gmail.com</a></div>
+            <div class="contact-item-value"><a href="/cdn-cgi/l/email-protection#16777a617f786072747f7a7262262756717b777f7a3875797b"><span class="__cf_email__" data-cfemail="77161b001e190113151e1b1303474637101a161e1b5914181a">[email&#160;protected]</span></a></div>
           </div>
         </div>
         <div class="contact-item">
@@ -98,22 +107,27 @@
       <p class="form-sub">Complete the form below and a senior consultant will be in contact shortly.</p>
       <div class="form-status" id="formStatus" aria-live="polite" role="status"></div>
 
-      <form id="contactForm" novalidate autocomplete="off">
+      <form id="contactForm" novalidate autocomplete="off" spellcheck="false">
+        <input type="hidden" name="access_key" value="5fd2c5a3-38e0-498f-a2db-dd11d5d6cf54">
+        <input type="hidden" name="redirect" value="">
+        <input type="hidden" name="subject" value="New Inquiry - AvdB Security and Protection (Unverified Sender)">
+        <input type="hidden" name="from_name" value="AvdB Security Website">
+        <input type="hidden" name="replyto" id="replyto">
 
-        <!-- honeypot: bots fill this, humans don't -->
-        <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;" aria-hidden="true">
-          <input type="text" name="botcheck" tabindex="-1" autocomplete="off">
+        <div class="hp-field" aria-hidden="true">
+          <label for="hp_website">Website</label>
+          <input type="text" id="hp_website" name="botcheck" tabindex="-1" autocomplete="off">
         </div>
 
         <div class="form-row">
           <div class="form-field">
             <label for="first_name">First Name</label>
-            <input type="text" id="first_name" name="first_name" placeholder="Alexander" maxlength="64" required>
+            <input type="text" id="first_name" name="first_name" placeholder="Alexander" maxlength="64" autocomplete="given-name" required>
             <span class="field-error" id="err_first_name"></span>
           </div>
           <div class="form-field">
             <label for="last_name">Last Name</label>
-            <input type="text" id="last_name" name="last_name" placeholder="De Vries" maxlength="64" required>
+            <input type="text" id="last_name" name="last_name" placeholder="De Vries" maxlength="64" autocomplete="family-name" required>
             <span class="field-error" id="err_last_name"></span>
           </div>
         </div>
@@ -121,19 +135,20 @@
         <div class="form-row">
           <div class="form-field">
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="you@company.com" maxlength="254" required>
+            <input type="email" id="email" name="email" placeholder="you@company.com" maxlength="254" autocomplete="email" required>
             <span class="field-error" id="err_email"></span>
           </div>
           <div class="form-field">
             <label for="phone">Phone (optional)</label>
-            <input type="tel" id="phone" name="phone" placeholder="+31 6 0000 0000" maxlength="24">
+            <input type="tel" id="phone" name="phone" placeholder="+31 6 0000 0000" maxlength="24" autocomplete="tel">
             <span class="field-error" id="err_phone"></span>
           </div>
         </div>
 
         <div class="form-field">
           <label for="organisation">Organisation</label>
-          <input type="text" id="organisation" name="organisation" placeholder="Company Name" maxlength="128">
+          <input type="text" id="organisation" name="organisation" placeholder="Company Name" maxlength="128" autocomplete="organization">
+          <span class="field-error" id="err_organisation"></span>
         </div>
 
         <div class="form-field">
@@ -149,7 +164,7 @@
 
         <div class="form-field">
           <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Describe your security requirements..." maxlength="2000" required></textarea>
+          <textarea id="message" name="message" placeholder="Describe your security requirements or the nature of your enquiry..." maxlength="2000" required></textarea>
           <span class="field-error" id="err_message"></span>
           <div class="char-counter"><span id="charCount">0</span> / 2000</div>
         </div>
@@ -163,7 +178,6 @@
           <span id="btnText">Submit Inquiry</span>
           <span id="btnLoader" class="btn-loader" hidden>Sending...</span>
         </button>
-
       </form>
     </div>
 
@@ -175,19 +189,21 @@
   <p>Designed by <span>AvdB Security &amp; Protection</span></p>
 </footer>
 
-<script>
-// Cursor
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
-(function tick(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
-document.querySelectorAll('a,button,input,textarea,select').forEach(el => {
-  el.addEventListener('mouseenter', () => { cur.style.width='18px'; cur.style.height='18px'; ring.style.width='52px'; ring.style.height='52px'; });
-  el.addEventListener('mouseleave', () => { cur.style.width='8px'; cur.style.height='8px'; ring.style.width='32px'; ring.style.height='32px'; });
-});
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* global grecaptcha */
 
-// Hamburger
+if (window.matchMedia('(pointer: fine)').matches) {
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx+'px'; cur.style.top = my+'px'; });
+  (function tick(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
+  document.querySelectorAll('a,button,input,textarea,select').forEach(el => {
+    el.addEventListener('mouseenter', () => { cur.style.width='18px'; cur.style.height='18px'; ring.style.width='52px'; ring.style.height='52px'; });
+    el.addEventListener('mouseleave', () => { cur.style.width='8px'; cur.style.height='8px'; ring.style.width='32px'; ring.style.height='32px'; });
+  });
+}
+
 const hamburger = document.getElementById('navHamburger');
 const mobileMenu = document.getElementById('navMobileMenu');
 hamburger.addEventListener('click', () => {
@@ -201,31 +217,31 @@ mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => 
   document.body.style.overflow = '';
 }));
 
-// Reveal on scroll
-const obs = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-}), { threshold: 0.08 });
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Char counter
-document.getElementById('message').addEventListener('input', function() {
-  document.getElementById('charCount').textContent = this.value.length;
-});
+const msgField = document.getElementById('message');
+const charCount = document.getElementById('charCount');
+msgField.addEventListener('input', () => { charCount.textContent = msgField.value.length; });
 
-// Validation
+function sanitise(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;').replace(/\//g,'&#x2F;');
+}
+
 const rules = {
-  first_name:   { test: v => v.trim().length >= 1 && v.trim().length <= 64, msg: 'Please enter your first name.' },
-  last_name:    { test: v => v.trim().length >= 1 && v.trim().length <= 64, msg: 'Please enter your last name.' },
-  email:        { test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()), msg: 'Please enter a valid email address.' },
-  phone:        { test: v => v.trim() === '' || v.trim().length >= 7, msg: 'Please enter a valid phone number.' },
-  service:      { test: v => v !== '', msg: 'Please select a service.' },
-  message:      { test: v => v.trim().length >= 10, msg: 'Message must be at least 10 characters.' }
+  first_name:   { test: v => /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF'\- ]{1,64}$/.test(v.trim()), msg: 'Please enter a valid first name (letters only, max 64 chars).' },
+  last_name:    { test: v => /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF'\- ]{1,64}$/.test(v.trim()), msg: 'Please enter a valid last name (letters only, max 64 chars).' },
+  email:        { test: v => /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(v.trim()), msg: 'Please enter a valid email address.' },
+  phone:        { test: v => v.trim() === '' || /^[+\d\s\-()]{7,24}$/.test(v.trim()), msg: 'Phone number format invalid.' },
+  organisation: { test: v => v.trim().length <= 128, msg: 'Organisation name must be 128 characters or less.' },
+  service:      { test: v => ['Penetration Testing','IT & Security Support','Website Development'].includes(v), msg: 'Please select a valid service.' },
+  message:      { test: v => v.trim().length >= 10 && v.trim().length <= 2000, msg: 'Message must be between 10 and 2000 characters.' }
 };
 
-function showError(id, msg) {
-  const el = document.getElementById('err_' + id);
+function showError(fieldId, msg) {
+  const el = document.getElementById('err_' + fieldId);
   if (el) { el.textContent = msg; el.style.display = 'block'; }
-  const input = document.getElementById(id);
+  const input = document.getElementById(fieldId) || document.querySelector('[name="' + fieldId + '"]');
   if (input) input.classList.add('input-error');
 }
 
@@ -234,15 +250,15 @@ function clearErrors() {
   document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
 }
 
-// Rate limit: 5 per 10 min
+const RATE_KEY = 'avdb_form_submissions';
 function checkRateLimit() {
   try {
     const now = Date.now();
-    const raw = sessionStorage.getItem('avdb_rl');
-    const ts = raw ? JSON.parse(raw).filter(t => now - t < 600000) : [];
-    if (ts.length >= 5) return false;
-    ts.push(now);
-    sessionStorage.setItem('avdb_rl', JSON.stringify(ts));
+    const raw = sessionStorage.getItem(RATE_KEY);
+    const timestamps = raw ? JSON.parse(raw).filter(t => now - t < 600000) : [];
+    if (timestamps.length >= 3) return false;
+    timestamps.push(now);
+    sessionStorage.setItem(RATE_KEY, JSON.stringify(timestamps));
     return true;
   } catch(e) { return true; }
 }
@@ -254,29 +270,25 @@ function setStatus(type, msg) {
   el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// Form submit
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   clearErrors();
 
   const form = e.target;
   const submitBtn = document.getElementById('submitBtn');
-  const btnText = document.getElementById('btnText');
+  const btnText   = document.getElementById('btnText');
   const btnLoader = document.getElementById('btnLoader');
 
-  // Honeypot check
-  if (form.elements['botcheck'] && form.elements['botcheck'].value !== '') {
+  if (form.elements['botcheck'].value !== '') {
     setStatus('success', 'Your inquiry has been submitted successfully.');
     return;
   }
 
-  // Rate limit
   if (!checkRateLimit()) {
-    setStatus('error', 'Too many submissions. Please wait a few minutes and try again.');
+    setStatus('error', 'Too many submissions. Please wait a few minutes before trying again.');
     return;
   }
 
-  // Validate
   let valid = true;
   for (const [field, rule] of Object.entries(rules)) {
     const el = form.elements[field];
@@ -284,45 +296,26 @@ document.getElementById('contactForm').addEventListener('submit', async function
     if (!rule.test(el.value)) { showError(field, rule.msg); valid = false; }
   }
   if (!form.elements['privacy'].checked) {
-    showError('privacy', 'You must accept the Privacy Policy.');
+    showError('privacy', 'You must accept the Privacy Policy to continue.');
     valid = false;
   }
   if (!valid) return;
 
-  // Build payload - raw values, no sanitising
-  const payload = {
-    access_key: '5fd2c5a3-38e0-498f-a2db-dd11d5d6cf54',
-    subject: 'New Inquiry - AvdB Security & Protection',
-    from_name: 'AvdB Security Website',
-    replyto: form.elements['email'].value,
-    first_name: form.elements['first_name'].value,
-    last_name: form.elements['last_name'].value,
-    email: form.elements['email'].value,
-    phone: form.elements['phone'].value,
-    organisation: form.elements['organisation'].value,
-    service: form.elements['service'].value,
-    message: form.elements['message'].value
-  };
+  const allowedFields = ['access_key','redirect','subject','from_name','first_name','last_name','email','phone','organisation','service','message'];
+  const payload = {};
+  allowedFields.forEach(name => {
+    const el = form.elements[name];
+    if (el) payload[name] = sanitise(el.value);
+  });
+  payload.replyto = sanitise(form.elements['email'].value);
 
   submitBtn.disabled = true;
   btnText.hidden = true;
   btnLoader.hidden = false;
 
   try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if (res.ok && data.success) {
-      setStatus('success', 'Your inquiry has been received. A senior consultant will be in contact within one business day.');
-      form.reset();
-      document.getElementById('charCount').textContent = '0';
-    } else {
-      setStatus('error', 'Something went wrong. Please email us directly at alwinvdbildt01@gmail.com');
-      console.error('[Form error]', data);
-    }
+    const recaptchaToken = await grecaptcha.execute('6LevGZksAAAAACjMJ--cXgRXwGCMwMsCL1SbYPOA', { action: 'contact_form' });
+    payload['g-recaptcha-response'] = recaptchaToken;
   } catch(err) {
     setStatus('error', 'Something went wrong. Please email us directly at alwinvdbildt01@gmail.com');
     console.error('[Form error]', err);
