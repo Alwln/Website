@@ -68,7 +68,7 @@
           </div>
           <div>
             <div class="contact-item-label">Email</div>
-            <div class="contact-item-value"><a href="/cdn-cgi/l/email-protection#16777a617f786072747f7a7262262756717b777f7a3875797b"><span class="__cf_email__" data-cfemail="77161b001e190113151e1b1303474637101a161e1b5914181a">[email&#160;protected]</span></a></div>
+            <div class="contact-item-value">alwinvdbildt01@gmail.com</div>
           </div>
         </div>
         <div class="contact-item">
@@ -147,9 +147,9 @@
           <label for="service">Service of Interest</label>
           <select id="service" name="service" required>
             <option value="" disabled selected>Select a service...</option>
-            <option value="Penetration Testing">Penetration Testing</option>
+            <option value="Website Security Review">Website Security Review</option>
             <option value="IT & Security Support">IT &amp; Security Support</option>
-            <option value="Website Development">Website Development</option>
+            <option value="€29 Security Quick Check">&euro;29 Security Quick Check</option>
           </select>
           <span class="field-error" id="err_service"></span>
         </div>
@@ -181,7 +181,7 @@
   <p>Designed by <span>AvdB Security &amp; Protection</span></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 if (window.matchMedia('(pointer: fine)').matches) {
   const cur = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
@@ -224,7 +224,7 @@ const rules = {
   email:        { test: v => /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(v.trim()), msg: 'Please enter a valid email address.' },
   phone:        { test: v => v.trim() === '' || /^[+\d\s\-()]{7,24}$/.test(v.trim()), msg: 'Phone number format invalid.' },
   organisation: { test: v => v.trim().length <= 128, msg: 'Organisation name must be 128 characters or less.' },
-  service:      { test: v => ['Penetration Testing','IT & Security Support','Website Development'].includes(v), msg: 'Please select a valid service.' },
+  service:      { test: v => ['Website Security Review','IT & Security Support','€29 Security Quick Check'].includes(v), msg: 'Please select a valid service.' },
   message:      { test: v => v.trim().length >= 10 && v.trim().length <= 2000, msg: 'Message must be between 10 and 2000 characters.' }
 };
 
