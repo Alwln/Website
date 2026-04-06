@@ -9,6 +9,12 @@
 <style>
   html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
 </style>
+<script>
+  // Mobile browsers can't properly display PDFs in iframes, so redirect to the PDF directly
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    window.location.replace('images/Pentest_Report_Sample.pdf');
+  }
+</script>
 </head>
 <body>
 <iframe src="images/Pentest_Report_Sample.pdf" width="100%" height="100%" style="border: none;"></iframe>
