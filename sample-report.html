@@ -6,17 +6,94 @@
 <title>Sample Report — AvdB Security & Protection</title>
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="apple-touch-icon" href="images/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-</style>
-<script>
-  // Mobile browsers can't properly display PDFs in iframes, so redirect to the PDF directly
-  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    window.location.replace('images/Pentest_Report_Sample.pdf');
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #050505; }
+
+  /* Desktop: full-screen iframe */
+  .desktop-view { width: 100%; height: 100%; }
+  .mobile-view { display: none; }
+
+  /* Mobile: styled fallback page */
+  @media (max-width: 1000px) {
+    html, body { overflow: auto; }
+    .desktop-view { display: none; }
+    .mobile-view {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 24px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .mobile-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 32px;
+      filter: drop-shadow(0 0 12px rgba(184, 150, 62, 0.35));
+    }
+    .mobile-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: #E8E4DC;
+      margin-bottom: 12px;
+    }
+    .mobile-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: #7A7570;
+      line-height: 1.8;
+      max-width: 360px;
+      margin-bottom: 36px;
+    }
+    .mobile-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      padding: 17px 48px;
+      background: #B8963E;
+      color: #050505;
+      text-decoration: none;
+      transition: background .3s;
+    }
+    .mobile-btn:hover { background: #E8C97A; }
+    .mobile-back {
+      margin-top: 20px;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: #7A7570;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .3s;
+    }
+    .mobile-back:hover { color: #B8963E; }
   }
-</script>
+</style>
 </head>
 <body>
-<iframe src="images/Pentest_Report_Sample.pdf" width="100%" height="100%" style="border: none;"></iframe>
+
+<iframe class="desktop-view" src="images/Pentest_Report_Sample.pdf" width="100%" height="100%" style="border: none;"></iframe>
+
+<div class="mobile-view">
+  <img src="images/Logo%20kopie.png" alt="AvdB Logo" class="mobile-logo">
+  <div class="mobile-title">Sample Security Report</div>
+  <p class="mobile-sub">Tap the button below to view an example of the security report you'll receive after a Website Security Review.</p>
+  <a href="images/Pentest_Report_Sample.pdf" class="mobile-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    Open Report
+  </a>
+  <a href="services.html" class="mobile-back">&larr; Back to Services</a>
+</div>
+
 </body>
 </html>
