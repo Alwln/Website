@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://api.web3forms.com; img-src 'self' data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://api.web3forms.com https://dns.google; img-src 'self' data:;">
 <title>Contact &mdash; AvdB Security &amp; Protection</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="contact.css">
-<link rel="icon" type="image/png" href="images/Logo%20kopie.png">
-<link rel="apple-touch-icon" href="images/Logo%20kopie.png">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="apple-touch-icon" href="images/favicon.png">
 </head>
@@ -220,6 +218,21 @@ function sanitise(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;').replace(/\//g,'&#x2F;');
 }
 
+// Check if email domain actually exists via DNS MX record lookup
+async function checkEmailDomain(email) {
+  const domain = email.trim().toLowerCase().split('@')[1];
+  if (!domain) return false;
+  try {
+    const res = await fetch('https://dns.google/resolve?name=' + encodeURIComponent(domain) + '&type=MX');
+    const data = await res.json();
+    // Status 0 = NOERROR, Answer must contain MX records
+    return data.Status === 0 && data.Answer && data.Answer.length > 0;
+  } catch(e) {
+    // If DNS check fails (network issue), allow it through
+    return true;
+  }
+}
+
 const rules = {
   first_name:   { test: v => /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF'\- ]{1,64}$/.test(v.trim()), msg: 'Please enter a valid first name (letters only, max 64 chars).' },
   last_name:    { test: v => /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF'\- ]{1,64}$/.test(v.trim()), msg: 'Please enter a valid last name (letters only, max 64 chars).' },
@@ -293,6 +306,19 @@ document.getElementById('contactForm').addEventListener('submit', async function
   }
   if (!valid) return;
 
+  // Check if email domain actually exists
+  submitBtn.disabled = true;
+  btnText.hidden = true;
+  btnLoader.hidden = false;
+  const domainExists = await checkEmailDomain(form.elements['email'].value);
+  if (!domainExists) {
+    showError('email', 'This email domain does not exist. Please check for typos.');
+    submitBtn.disabled = false;
+    btnText.hidden = false;
+    btnLoader.hidden = true;
+    return;
+  }
+
   const allowedFields = ['access_key','redirect','subject','from_name','first_name','last_name','email','phone','organisation','service','message'];
   const payload = {};
   allowedFields.forEach(name => {
@@ -300,10 +326,6 @@ document.getElementById('contactForm').addEventListener('submit', async function
     if (el) payload[name] = sanitise(el.value);
   });
   payload.replyto = sanitise(form.elements['email'].value);
-
-  submitBtn.disabled = true;
-  btnText.hidden = true;
-  btnLoader.hidden = false;
 
   try {
     const res = await fetch('https://api.web3forms.com/submit', {
