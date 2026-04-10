@@ -116,7 +116,7 @@
 
     <div class="contact-form-wrap reveal">
       <div class="form-title">Send a <em>Message</em></div>
-      <p class="form-sub">Complete the form below and a senior consultant will be in contact shortly.</p>
+      <p class="form-sub">Complete the form below and a consultant will be in contact shortly.</p>
       <div class="form-status" id="formStatus" aria-live="polite" role="status"></div>
 
       <form id="contactForm" novalidate autocomplete="off" spellcheck="false">
@@ -281,7 +281,7 @@ function checkRateLimit() {
     const now = Date.now();
     const raw = sessionStorage.getItem(RATE_KEY);
     const timestamps = raw ? JSON.parse(raw).filter(t => now - t < 600000) : [];
-    if (timestamps.length >= 3) return false;
+    if (timestamps.length >= 4) return false;
     timestamps.push(now);
     sessionStorage.setItem(RATE_KEY, JSON.stringify(timestamps));
     return true;
@@ -355,7 +355,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     });
     const data = await res.json();
     if (res.ok && data.success) {
-      setStatus('success', 'Your inquiry has been received. A senior consultant will be in contact within one business day.');
+      setStatus('success', 'Your inquiry has been received. A consultant will be in contact within 1-2 business days.');
       form.reset();
       charCount.textContent = '0';
     } else {
