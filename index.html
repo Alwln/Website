@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AvdB Security &amp; Protection — Practical Website Security for Small Businesses</title>
+<meta name="description" content="Affordable website security reviews, pentesting, and IT support for freelancers, small businesses, and startups in the Netherlands. Clear reports, honest pricing.">
+<meta name="keywords" content="website security, pentest, web security, security review, IT support, cybersecurity, small business security, SPS official, AvdB Security, penetration testing, Netherlands">
+<meta name="author" content="AvdB Security & Protection">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.sps-official.com/">
+
+<!-- Open Graph (Facebook, LinkedIn) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="AvdB Security & Protection — Practical Website Security">
+<meta property="og:description" content="Affordable website security reviews and IT support for small businesses. Clear reports, honest pricing, no jargon.">
+<meta property="og:url" content="https://www.sps-official.com/">
+<meta property="og:site_name" content="AvdB Security & Protection">
+<meta property="og:image" content="https://www.sps-official.com/images/Logo%20kopie.png">
+
+<!-- Alternate language -->
+<link rel="alternate" hreflang="en" href="https://www.sps-official.com/index.html">
+<link rel="alternate" hreflang="nl" href="https://www.sps-official.com/index-nl.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AvdB Security & Protection — Practical Website Security">
+<meta name="twitter:description" content="Affordable website security reviews and IT support for small businesses.">
+<meta name="twitter:image" content="https://www.sps-official.com/images/Logo%20kopie.png">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "AvdB Security & Protection",
+  "alternateName": "SPS Official",
+  "url": "https://www.sps-official.com",
+  "logo": "https://www.sps-official.com/images/Logo%20kopie.png",
+  "description": "Affordable website security reviews, penetration testing, and IT support for freelancers, small businesses, and startups.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "NL"
+  },
+  "telephone": "+31643115610",
+  "email": "alwinvdbildt01@gmail.com",
+  "areaServed": "NL",
+  "serviceType": ["Website Security Review", "Penetration Testing", "IT Support", "Cybersecurity Consulting"],
+  "priceRange": "€29 - €699"
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/favicon.png">
+
+<!-- Language switcher styles (added — does not touch existing CSS files) -->
+<style>
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+  }
+  .lang-switch a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color .3s;
+    padding: 4px 4px;
+  }
+  .lang-switch a:hover { color: var(--gold-light); }
+  .lang-switch a.active { color: var(--gold); }
+  .lang-switch span { color: var(--gold-dim); }
+  @media (max-width: 1000px) { .lang-switch { display: none; } }
+  .nav-mobile-lang {
+    display: flex;
+    gap: 14px;
+    margin-top: 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+  }
+  .nav-mobile-lang a {
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 8px 18px;
+    border: 1px solid rgba(184,150,62,0.2);
+    transition: color .3s, border-color .3s;
+  }
+  .nav-mobile-lang a.active { color: var(--gold); border-color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="bg-scene"></div>
+<div class="bg-vignette"></div>
+<div class="bg-noise"></div>
+<div class="bg-glow-gold"></div>
+<div class="bg-glow-deep"></div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="images/Logo%20kopie.png" alt="AvdB Logo">
+    <div class="nav-logo-text">AvdB <span>Security &amp; Protection</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="lang-switch">
+    <a href="index.html" class="active">EN</a>
+    <span>/</span>
+    <a href="index-nl.html">NL</a>
+  </div>
+  <a href="contact.html" class="nav-cta">Engage</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="index.html" class="active">Home</a>
+  <a href="#about">About</a>
+  <a href="services.html">Services</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="nav-mobile-cta">Engage</a>
+  <div class="nav-mobile-lang">
+    <a href="index.html" class="active">EN</a>
+    <a href="index-nl.html">NL</a>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-accent-line"></div>
+  <div class="hero-content">
+    <div class="hero-overline">Cybersecurity</div>
+    <div class="hero-title-small">Defend · Detect · Respond</div>
+    <h1 class="hero-title">Practical<br><span class="gold-word">Security</span><br>for Small Businesses.</h1>
+    <div class="hero-title-rule"></div>
+    <p class="hero-desc">Affordable website security reviews and IT support for freelancers, small businesses, and startups.</p>
+    <div class="hero-btns">
+      <a href="services.html" class="btn-gold">Our Services</a>
+      <a href="contact.html" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-side-tags">
+    <div class="side-tag"><div class="side-tag-dot"></div><div class="side-tag-label">Security Reviews</div></div>
+    <div class="side-tag"><div class="side-tag-dot"></div><div class="side-tag-label">IT Support</div></div>
+    <div class="side-tag"><div class="side-tag-dot"></div><div class="side-tag-label">Honest Pricing</div></div>
+  </div>
+  <div class="hero-visual">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <img src="images/Logo%20kopie.png" alt="AvdB Security">
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-stat">
+      <div class="hero-stat-title">Website Security Reviews</div>
+      <div class="hero-stat-desc">I check your website for vulnerabilities and give you a clear report with practical fixes.</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-title">IT &amp; Security Support</div>
+      <div class="hero-stat-desc">Ongoing security advice, phishing checks, and general tech guidance for small businesses.</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">01 / About</div>
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <div class="eyebrow">Who I Am</div>
+      <h2><em>Who I Am</em></h2>
+      <div class="about-photo-wrapper">
+        <img src="images/alwin-photo.jpg" alt="Photo of Alwin van der Bildt" class="about-photo">
+      </div>
+      <p>I'm Alwin van der Bildt, founder of AvdB Security &amp; Protection. I combine hands-on security experience with an academic foundation in cybersecurity at a University of Applied Sciences.</p>
+      <p>I work with small businesses and startups to identify security weaknesses, improve their IT setup, and make sure their online presence is properly secured &mdash; without the enterprise price tag.</p>
+      <p>Every client works directly with me. No account managers, no hand-offs. Your security has my full focus.</p>
+    </div>
+    <div class="about-right reveal">
+      <div class="about-stat"><div class="about-stat-num">50+</div><div class="about-stat-label">Systems Tested</div></div>
+      <div class="about-stat"><div class="about-stat-num">100%</div><div class="about-stat-label">Security-Focused Approach</div></div>
+      <div class="about-stat"><div class="about-stat-num">Focused</div><div class="about-stat-label">On Practical Security Solutions</div></div>
+      <div class="about-stat"><div class="about-stat-num">10+</div><div class="about-stat-label">Projects Completed</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="who-this-is-for">
+  <div class="section-label">02 / Audience</div>
+  <div class="section-header reveal">
+    <h2 class="section-title">Who This Is <em>For</em></h2>
+    <div class="section-rule"></div>
+    <p class="section-sub">My services are designed for:</p>
+  </div>
+  <div class="audience-grid">
+    <div class="audience-card reveal">
+      <svg class="audience-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <p class="audience-desc">Freelancers and solo entrepreneurs who have a website but have never thought about security</p>
+    </div>
+    <div class="audience-card reveal">
+      <svg class="audience-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <p class="audience-desc">Small businesses and local shops that want to make sure their website and email are safe</p>
+    </div>
+    <div class="audience-card reveal">
+      <svg class="audience-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <p class="audience-desc">Startups that need affordable security advice without enterprise price tags</p>
+    </div>
+    <div class="audience-card reveal">
+      <svg class="audience-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <p class="audience-desc">Anyone who has received a suspicious email and wants to know if it's safe</p>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works">
+  <div class="section-label">03 / Process</div>
+  <div class="section-header reveal">
+    <h2 class="section-title">How It <em>Works</em></h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="how-steps">
+    <div class="how-step reveal">
+      <div class="how-step-num">01</div>
+      <div class="how-step-name">You Reach Out</div>
+      <p class="how-step-desc">Send me a message or fill in the contact form. Tell me a bit about your business and what you need help with.</p>
+      <div class="how-step-arrow"></div>
+    </div>
+    <div class="how-step reveal">
+      <div class="how-step-num">02</div>
+      <div class="how-step-name">I Review Your Setup</div>
+      <p class="how-step-desc">I take a close look at your website, systems, or specific concern and identify any issues or risks.</p>
+      <div class="how-step-arrow"></div>
+    </div>
+    <div class="how-step reveal">
+      <div class="how-step-num">03</div>
+      <div class="how-step-name">You Get a Clear Report</div>
+      <p class="how-step-desc">You receive a straightforward report with my findings and practical recommendations you can actually act on.</p>
+    </div>
+  </div>
+</section>
+
+<section id="services-preview">
+  <div class="section-label">04 / Services</div>
+  <div class="section-header reveal">
+    <h2 class="section-title">What I <em>Offer</em></h2>
+    <div class="section-rule"></div>
+    <p class="section-sub">Straightforward security services at honest prices.</p>
+  </div>
+  <div class="services-preview-grid">
+    <div class="service-preview-card reveal">
+      <div class="sp-num">01</div>
+      <svg class="sp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="sp-name">Website Security Reviews</div>
+      <p class="sp-desc">I check your website for common security weaknesses, misconfigurations, and vulnerabilities &mdash; then give you a clear report explaining what I found and how to fix it.</p>
+    </div>
+    <div class="service-preview-card reveal">
+      <div class="sp-num">02</div>
+      <svg class="sp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      <div class="sp-name">IT &amp; Security Support</div>
+      <p class="sp-desc">Ongoing support for your IT questions, security advice, phishing email checks, and general tech guidance &mdash; available as an affordable monthly subscription.</p>
+    </div>
+    <div class="service-preview-card reveal">
+      <div class="sp-num">03</div>
+      <svg class="sp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <div class="sp-name">Initial Check</div>
+      <p class="sp-desc">Not sure if you need my help? I'll take a quick look at your website's security basics for only &euro;29 and let you know if there are any obvious issues. No strings attached.</p>
+    </div>
+  </div>
+  <div class="services-cta reveal">
+    <a href="services.html" class="btn-gold">Explore Services</a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 <span>AvdB Security &amp; Protection</span>. All rights reserved.</p>
+  <p>Designed by <span>AvdB Security &amp; Protection</span></p>
+</footer>
+
+<script src="index.js"></script>
+</body>
+</html>
