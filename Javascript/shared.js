@@ -120,8 +120,7 @@
 
             if (menuIsOpen()) {
                 sluitMenu(false);
-            }
-            else {
+            } else {
                 openMenu();
             }
         });
@@ -240,7 +239,7 @@
 
         requestAnimationFrame(kijkNaarScroll);
 
-    }, { passive: true });
+    }, {passive: true});
 
 
     /* Toetsenbordfocus mag nooit in een verborgen navbar terechtkomen */
@@ -282,12 +281,30 @@
 
     if (!formulier || !status) return;
 
+    const TAAL = (document.documentElement.lang || "nl")
+        .toLowerCase()
+        .startsWith("en")
+        ? "en"
+        : "nl";
+
+    function tekst(nl, en) {
+        return TAAL === "en" ? en : nl;
+    }
+
+    formulier.noValidate = true;
+
     /* hCaptcha/Web3Forms wordt pas geladen nadat iemand het formulier
        daadwerkelijk gebruikt. Zo krijgt een gewone paginabezoeker geen
        verbinding met de captcha-aanbieder zonder reden. */
 
     const captchaElement = formulier.querySelector(".h-captcha");
     let captchaScriptGeladen = false;
+
+    let captchaScriptMislukt = false;
+
+    if (captchaElement) {
+        captchaElement.dataset.lang = TAAL;
+    }
 
     function laadCaptcha() {
         if (!captchaElement || captchaScriptGeladen) return;
@@ -299,12 +316,17 @@
         script.async = true;
         script.defer = true;
         script.dataset.avdbCaptcha = "true";
+
+        script.addEventListener("error", function () {
+            captchaScriptMislukt = true;
+        }, {once: true});
+
         document.head.appendChild(script);
     }
 
     if (captchaElement) {
-        formulier.addEventListener("focusin", laadCaptcha, { once: true });
-        formulier.addEventListener("pointerdown", laadCaptcha, { once: true, passive: true });
+        formulier.addEventListener("focusin", laadCaptcha, {once: true});
+        formulier.addEventListener("pointerdown", laadCaptcha, {once: true, passive: true});
     }
 
 
@@ -323,7 +345,7 @@
     const REGELS = {
 
         name: {
-            label: "Naam",
+            label: tekst("Naam", "Name"),
             verplicht: true,
             min: 2,
             max: 100,
@@ -331,14 +353,14 @@
         },
 
         company: {
-            label: "Bedrijf",
+            label: tekst("Bedrijf", "Company"),
             verplicht: false,
             max: 120,
             enkeleRegel: true
         },
 
         email: {
-            label: "E-mailadres",
+            label: tekst("E-mailadres", "Email address"),
             verplicht: true,
             min: 6,
             max: 254,
@@ -347,7 +369,7 @@
         },
 
         phone: {
-            label: "Telefoonnummer",
+            label: tekst("Telefoonnummer", "Phone number"),
             verplicht: false,
             max: 25,
             enkeleRegel: true,
@@ -355,14 +377,19 @@
         },
 
         service: {
-            label: "Dienst",
+            label: tekst("Dienst", "Service"),
             verplicht: true,
             keuzes: [
                 "Maatwerk website",
                 "AI-assistent",
                 "Onderhoud",
                 "Bestaande website verbeteren",
-                "Anders"
+                "Anders",
+                "Custom website",
+                "AI assistant",
+                "Maintenance",
+                "Improving an existing website",
+                "Something else"
             ]
         },
 
@@ -375,12 +402,17 @@
                 "Onder € 1.500",
                 "€ 1.500 – € 2.500",
                 "€ 2.500 – € 5.000",
-                "€ 5.000+"
+                "€ 5.000+",
+                "Not sure yet",
+                "Under € 1,500",
+                "€ 1,500 – € 2,500",
+                "€ 2,500 – € 5,000",
+                "€ 5,000+"
             ]
         },
 
         message: {
-            label: "Bericht",
+            label: tekst("Bericht", "Message"),
             verplicht: true,
             min: 10,
             max: 2000,
@@ -497,7 +529,13 @@
             if (!waarde) {
 
                 if (regel.verplicht) {
-                    return meldFout(regel.label + " is nog leeg.", element);
+                    return meldFout(
+                        tekst(
+                            regel.label + " is nog leeg.",
+                            regel.label + " is required."
+                        ),
+                        element
+                    );
                 }
 
                 waarden[naam] = "";
@@ -506,31 +544,72 @@
 
 
             if (regel.enkeleRegel && /[\r\n]/.test(element.value)) {
-                return meldFout(regel.label + " mag maar één regel zijn.", element);
+                return meldFout(
+                    tekst(
+                        regel.label + " mag maar één regel zijn.",
+                        regel.label + " may only contain one line."
+                    ),
+                    element
+                );
             }
+
 
             if (regel.min && waarde.length < regel.min) {
-                return meldFout(regel.label + " is te kort, minimaal " + regel.min + " tekens.", element);
+                return meldFout(
+                    tekst(
+                        regel.label + " is te kort, minimaal " + regel.min + " tekens.",
+                        regel.label + " is too short. Use at least " + regel.min + " characters."
+                    ),
+                    element
+                );
             }
+
 
             if (regel.max && waarde.length > regel.max) {
-                return meldFout(regel.label + " is te lang, maximaal " + regel.max + " tekens.", element);
+                return meldFout(
+                    tekst(
+                        regel.label + " is te lang, maximaal " + regel.max + " tekens.",
+                        regel.label + " is too long. Use no more than " + regel.max + " characters."
+                    ),
+                    element
+                );
             }
+
 
             if (regel.patroon && !regel.patroon.test(waarde)) {
-                return meldFout("Controleer je " + regel.label.toLowerCase() + " even.", element);
+                return meldFout(
+                    tekst(
+                        "Controleer je " + regel.label.toLowerCase() + " even.",
+                        "Please check your " + regel.label.toLowerCase() + "."
+                    ),
+                    element
+                );
             }
 
+
             if (regel.keuzes && regel.keuzes.indexOf(waarde) === -1) {
-                return meldFout("Kies een geldige optie bij " + regel.label.toLowerCase() + ".", element);
+                return meldFout(
+                    tekst(
+                        "Kies een geldige optie bij " + regel.label.toLowerCase() + ".",
+                        "Please choose a valid option for " + regel.label.toLowerCase() + "."
+                    ),
+                    element
+                );
             }
+
 
             if (regel.maxLinks) {
 
                 const links = waarde.match(/https?:\/\/|www\./gi);
 
                 if (links && links.length > regel.maxLinks) {
-                    return meldFout("Er staan veel links in je bericht. Laat er een paar weg, dan komt het aan.", element);
+                    return meldFout(
+                        tekst(
+                            "Er staan veel links in je bericht. Laat er een paar weg, dan komt het aan.",
+                            "There are too many links in your message. Remove a few and try again."
+                        ),
+                        element
+                    );
                 }
             }
 
@@ -545,10 +624,10 @@
     /* =========================
        LAAG 4: DE CAPTCHA
 
-       Alleen verplicht als de widget ook echt op de pagina staat.
-       Zo blijft een pagina zonder captcha gewoon werken, terwijl
-       een pagina mét captcha niets doorlaat zonder token.
-    ========================= */
+           Alleen verplicht als de widget ook echt op de pagina staat.
+           Zo blijft een pagina zonder captcha gewoon werken, terwijl
+           een pagina mét captcha niets doorlaat zonder token.
+        ========================= */
 
     /* Eén keer bij het laden vastgesteld en daarna niet meer. Wie het
        blok later uit de pagina sloopt, maakt de captcha daarmee niet
@@ -571,8 +650,7 @@
 
             try {
                 window.hcaptcha.reset();
-            }
-            catch (fout) {
+            } catch (fout) {
                 /* Een captcha die niet te resetten valt, mag het
                    versturen niet alsnog laten klappen. */
             }
@@ -589,18 +667,23 @@
 
     function onderwerpregel(waarden) {
 
-        const delen = ["Aanvraag"];
+        const delen = [
+            tekst("Aanvraag", "Enquiry")
+        ];
 
         if (waarden.name && waarden.company) {
             delen.push(waarden.name + " (" + waarden.company + ")");
-        }
-        else if (waarden.name || waarden.company) {
+        } else if (waarden.name || waarden.company) {
             delen.push(waarden.name || waarden.company);
         }
 
         if (waarden.service) delen.push(waarden.service);
 
-        if (waarden.budget && waarden.budget !== "Nog niet zeker") {
+        if (
+            waarden.budget &&
+            waarden.budget !== "Nog niet zeker" &&
+            waarden.budget !== "Not sure yet"
+        ) {
             delen.push(waarden.budget);
         }
 
@@ -638,7 +721,10 @@
             formulier.reset();
 
             status.dataset.state = "success";
-            status.textContent = "Dank je, je bericht is binnen.";
+            status.textContent = tekst(
+                "Dank je, je bericht is binnen.",
+                "Thank you, your message has been received."
+            );
 
             return;
         }
@@ -647,24 +733,37 @@
         /* Laag 2: de vultijd en het tempo. */
 
         if (Date.now() - geopend < MINIMALE_VULTIJD) {
-            meldFout("Neem even de tijd om het formulier af te maken.", null);
+            meldFout(
+                tekst(
+                    "Neem even de tijd om het formulier af te maken.",
+                    "Please take a moment to complete the form."
+                ),
+                null
+            );
             return;
         }
 
         if (verstuurd >= MAXIMUM_PER_BEZOEK) {
-            meldFout("Je hebt al een paar berichten gestuurd. Bel of mail me gerust rechtstreeks.", null);
+            meldFout(
+                tekst(
+                    "Je hebt al een paar berichten gestuurd. Bel of mail me gerust rechtstreeks.",
+                    "You have already sent a few messages. Please call or email me directly."
+                ),
+                null
+            );
             return;
         }
 
         if (laatsteVerzending && Date.now() - laatsteVerzending < WACHTTIJD_TUSSEN) {
-            meldFout("Je bericht is net verstuurd. Even geduld voor het volgende.", null);
+            meldFout(
+                tekst(
+                    "Je bericht is net verstuurd. Even geduld voor het volgende.",
+                    "Your message was just sent. Please wait a moment before sending another."
+                ),
+                null
+            );
             return;
         }
-
-
-        /* De browser eerst, want die wijst het veld zelf aan. */
-
-        if (!formulier.reportValidity()) return;
 
 
         /* Laag 3. */
@@ -676,8 +775,27 @@
         /* Laag 4. */
 
         if (CAPTCHA_VERPLICHT && !captchaToken()) {
+
             laadCaptcha();
-            meldFout("Rond eerst de beveiligingscontrole af. Lukt dat niet, bel of mail me dan gerust rechtstreeks.", null);
+
+            if (captchaScriptMislukt) {
+                meldFout(
+                    tekst(
+                        "De beveiligingscontrole kon niet laden. Controleer of een adblocker of privacyfilter Web3Forms of hCaptcha blokkeert.",
+                        "The security check could not load. Check whether an ad blocker or privacy filter is blocking Web3Forms or hCaptcha."
+                    ),
+                    null
+                );
+            } else {
+                meldFout(
+                    tekst(
+                        "Rond eerst de beveiligingscontrole af. Lukt dat niet, bel of mail me dan gerust rechtstreeks.",
+                        "Please complete the security check first. If it does not work, contact me directly by phone or email."
+                    ),
+                    null
+                );
+            }
+
             return;
         }
 
@@ -693,8 +811,7 @@
 
             if (waarden[naam]) {
                 gegevens.set(naam, waarden[naam]);
-            }
-            else {
+            } else {
 
                 /* Een leeg optioneel veld hoeft niet mee. Scheelt
                    drie lege regels in elke mail. */
@@ -711,7 +828,10 @@
         verzendknop.disabled = true;
 
         status.dataset.state = "loading";
-        status.textContent = "Je bericht wordt verstuurd…";
+        status.textContent = tekst(
+            "Je bericht wordt verstuurd…",
+            "Your message is being sent…"
+        );
 
 
         try {
@@ -741,14 +861,18 @@
             laatsteVerzending = Date.now();
 
             status.dataset.state = "success";
-            status.textContent = "Dank je, je bericht is binnen. Ik reageer meestal binnen één werkdag.";
-        }
-        catch (fout) {
+            status.textContent = tekst(
+                "Dank je, je bericht is binnen. Ik reageer meestal binnen één werkdag.",
+                "Thank you, your message has been received. I usually reply within one working day."
+            );
+        } catch (fout) {
 
             status.dataset.state = "error";
-            status.textContent = "Versturen lukte niet. Bel of mail me gerust rechtstreeks.";
-        }
-        finally {
+            status.textContent = tekst(
+                "Versturen lukte niet. Bel of mail me gerust rechtstreeks.",
+                "Your message could not be sent. Please call or email me directly."
+            );
+        } finally {
 
             herstelCaptcha();
 
