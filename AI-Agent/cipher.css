@@ -1,0 +1,686 @@
+/* ============================================================
+   AI-agent — orb, tekstballon & Cipher-chatpaneel
+   Structuur:
+     1. Variabelen & reset
+     2. Orb (knop, rand, glas, aura, schaduw)
+     3. Tekstballon
+     4. Chatpaneel (frame, header, berichten, invoer)
+     5. Animaties
+     6. Toegankelijkheid & fallback
+   ============================================================ */
+
+/* ---------- 1. Variabelen & reset ---------- */
+:root {
+  --orb-size: 53px;
+  --orb-glow: rgba(110,50,220,.45);
+  --orb-glow-hover: rgba(140,80,230,.55);
+  --glass-bg: rgba(16,16,19,.82);
+  --glass-border: rgba(255,255,255,.1);
+  --gold: #d6b455;
+  --violet: #6b3eff;
+  --saffier: #213ae0;
+  --white-soft: rgba(255,255,255,.8);
+  --shadow-soft: rgba(20,0,50,.55);
+
+  /* warme gloed voor het chatpaneel, in de kleur van de site */
+  --chat-glow: rgba(214,180,85,.16);
+  --chat-line: rgba(246,212,81,.55);
+  --gold-bright: #f6d451;
+}
+
+.ai-agent, .ai-agent *,
+.cipher-chat, .cipher-chat * {
+  box-sizing: border-box;
+}
+
+/* ---------- 2. Orb ---------- */
+.ai-agent {
+  position: fixed; right: 42px; bottom: 42px; z-index: 9999;
+}
+
+.orb-float {
+  position: relative; width: var(--orb-size); height: var(--orb-size);
+  animation: floatOrb 5s ease-in-out infinite;
+}
+
+.ai-button {
+  position: relative; display: block; width: 100%; height: 100%;
+  border: none; padding: 0; border-radius: 50%; cursor: pointer;
+  overflow: hidden; z-index: 2;
+  background:
+    radial-gradient(circle 6px at 30% 20%, #fff 0%, rgba(255,255,255,.95) 28%, transparent 58%),
+    radial-gradient(circle 2.5px at 39% 13%, rgba(255,255,255,.98) 0%, transparent 100%),
+    radial-gradient(ellipse 52% 24% at 50% 100%, #ffb347 0%, rgba(255,179,71,.85) 17%, transparent 42%),
+    radial-gradient(ellipse 45% 20% at 15% 20%, #c86fff 0%, rgba(200,111,255,.6) 30%, transparent 55%),
+    radial-gradient(circle 36px at 70% 75%, rgba(40,0,90,.95) 0%, transparent 72%),
+    radial-gradient(circle at 33% 25%, #eedfff 0%, #b48fff 20%, var(--violet) 40%, var(--saffier) 62%, #0e1d9e 78%, #6b4c20 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    inset 0 1px 2px var(--white-soft),
+    inset 0 -1px 2px rgba(255,200,60,.7),
+    inset -10px -12px 20px rgba(40,0,70,.7),
+    inset 0 -3px 6px rgba(255,215,0,.55),
+    0 2px 6px var(--shadow-soft),
+    0 14px 38px var(--orb-glow);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.orb-float:hover .ai-button,
+.ai-button:focus-visible {
+  transform: scale(1.06);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.24),
+    inset 0 1px 2px rgba(255,255,255,.95),
+    inset 0 -1px 2px rgba(255,200,60,.85),
+    inset -10px -12px 20px rgba(40,0,70,.65),
+    inset 0 -3px 6px rgba(255,215,0,.65),
+    0 3px 10px rgba(20,0,50,.7),
+    0 22px 54px var(--orb-glow-hover);
+}
+
+.ai-button:focus-visible {
+  outline: 2px solid rgba(210,190,255,.9); outline-offset: 5px;
+}
+
+/* draaiende gekleurde rand */
+.ai-button::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; z-index: 1;
+  background: conic-gradient(from 210deg,
+    rgba(180,100,255,.5) 0deg,
+    rgba(80,140,255,.4) 120deg,
+    rgba(232,198,98,.5) 240deg,
+    rgba(180,100,255,.5) 360deg);
+  -webkit-mask: radial-gradient(circle, transparent 68%, #000 82%);
+          mask: radial-gradient(circle, transparent 68%, #000 82%);
+  mix-blend-mode: screen;
+  animation: rimSpin 26s linear infinite;
+  pointer-events: none;
+}
+
+/* glazen kristallaag — scherpe specular, reflectiestreep en dubbele glasrand */
+.orb-glass {
+  position: absolute; inset: 0; border-radius: 50%; z-index: 2;
+  overflow: hidden;
+  background:
+    /* glazen koepel: crisp toplicht */
+    radial-gradient(ellipse 76% 48% at 50% -14%, rgba(255,255,255,.68) 0%, rgba(255,255,255,.26) 46%, transparent 50%),
+    /* klein tweede lichtpunt rechtsboven */
+    radial-gradient(ellipse 22% 12% at 68% 9%, rgba(255,255,255,.4) 0%, transparent 75%),
+    /* diagonale kristal-reflectiestreep */
+    linear-gradient(118deg, transparent 42%, rgba(255,255,255,.09) 47%, rgba(255,255,255,.2) 50%, rgba(255,255,255,.09) 53%, transparent 58%),
+    /* dubbele glasrand */
+    radial-gradient(circle at 50% 50%, transparent 84%, rgba(255,255,255,.12) 85.5%, transparent 87%, rgba(255,255,255,.45) 88%, transparent 90.5%),
+    /* interne breking naar de rand */
+    radial-gradient(circle at 50% 50%, transparent 58%, rgba(30,0,60,.35) 82%, rgba(10,0,30,.7) 100%);
+  pointer-events: none;
+}
+
+/* oogjes — schalen mee met --orb-size */
+.orb-glass::before {
+  content: ""; position: absolute;
+  top:  calc(var(--orb-size) * 0.33);    /*  was 20px  */
+  left: calc(var(--orb-size) * 0.35);    /*  was 21px  */
+  width:  calc(var(--orb-size) * 0.085); /*  was 5px   */
+  height: calc(var(--orb-size) * 0.22);  /*  was 13px  */
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff, #f2edff);
+  box-shadow: calc(var(--orb-size) * 0.22) 0 0 #fff;  /*  afstand tussen de ogen, was 13px  */
+  filter: drop-shadow(0 1px 2px var(--shadow-soft));
+  animation: blink 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* periodieke lichtveeg over het glas (Apple-sheen) */
+.orb-glass::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(115deg,
+    transparent 32%,
+    rgba(255,255,255,.05) 44%,
+    rgba(255,255,255,.35) 50%,
+    rgba(255,255,255,.05) 56%,
+    transparent 68%);
+  mix-blend-mode: screen;
+  transform: translateX(-130%);
+  animation: glassSheen 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.orb-aura {
+  position: absolute; inset: -24px; z-index: 1; pointer-events: none;
+  opacity: 0; transform: scale(.72);
+  transition: opacity .5s, transform .5s cubic-bezier(.32,1.4,.6,1);
+  background: conic-gradient(from 30deg,
+    transparent 0deg,
+    rgba(160,80,255,.65) 20deg,
+    rgba(60,120,255,.5) 60deg,
+    transparent 80deg,
+    transparent 190deg,
+    rgba(232,198,98,.45) 230deg,
+    transparent 290deg);
+  -webkit-mask: radial-gradient(circle, transparent 42%, #000 45%, #000 55%, transparent 58%);
+          mask: radial-gradient(circle, transparent 42%, #000 45%, #000 55%, transparent 58%);
+}
+
+.orb-aura::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 200deg,
+    transparent 0deg,
+    rgba(232,198,98,.35) 22deg,
+    transparent 58deg,
+    rgba(180,100,255,.25) 155deg,
+    transparent 200deg);
+  -webkit-mask: radial-gradient(circle, transparent 44%, #000 47%, #000 57%, transparent 60%);
+          mask: radial-gradient(circle, transparent 44%, #000 47%, #000 57%, transparent 60%);
+  filter: blur(.4px);
+  animation: wispSpin 22s linear infinite;
+}
+
+.orb-aura::after {
+  content: ""; position: absolute; inset: -8px; border-radius: 50%;
+  background: conic-gradient(from 110deg,
+    transparent 0deg,
+    rgba(70,140,255,.25) 38deg,
+    transparent 98deg,
+    rgba(160,100,255,.2) 198deg,
+    transparent 258deg);
+  -webkit-mask: radial-gradient(circle, transparent 48%, #000 51%, #000 63%, transparent 66%);
+          mask: radial-gradient(circle, transparent 48%, #000 51%, #000 63%, transparent 66%);
+  filter: blur(2px);
+  animation: wispSpin 32s linear infinite reverse;
+}
+
+.orb-float:hover .orb-aura,
+.orb-float:focus-within .orb-aura {
+  opacity: .92; transform: scale(1);
+}
+
+.orb-shadow {
+  position: absolute; left: 50%; bottom: -15px; width: 42px; height: 8px;
+  margin-left: -21px; border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(110,50,220,.6) 0%,
+    rgba(255,200,50,.25) 36%,
+    rgba(10,0,30,.35) 52%,
+    transparent 68%);
+  filter: blur(1.5px);
+  animation: shadowPulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---------- 3. Tekstballon ---------- */
+.ai-bubble {
+  position: absolute; bottom: calc(100% + 16px); right: 2px;
+  padding: 10px 16px; border-radius: 999px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(16px) saturate(1.7);
+          backdrop-filter: blur(16px) saturate(1.7);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 1px 2px rgba(0,0,0,.3),
+    0 12px 28px rgba(0,0,0,.35),
+    0 14px 34px rgba(214,180,85,.12);
+  color: var(--gold);
+  font: 500 13px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  opacity: 0; transform: translateY(6px) scale(.94);
+  transform-origin: bottom right;
+  filter: blur(3px);
+  pointer-events: none;
+  transition: opacity .35s, transform .45s cubic-bezier(.32,1.4,.6,1), filter .35s;
+}
+
+.ai-bubble.is-visible {
+  opacity: 1; transform: translateY(0) scale(1); filter: blur(0);
+}
+
+/* ---------- 4. Chatpaneel ---------- */
+.cipher-chat {
+  position: fixed; right: 88px; bottom: 120px;
+  width: 480px; max-width: calc(100vw - 48px);
+  height: 340px; max-height: calc(100vh - 150px);
+  display: flex; flex-direction: column; z-index: 9998;
+  border-radius: 24px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+          backdrop-filter: blur(24px) saturate(1.8);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 2px 6px rgba(0,0,0,.5),
+    0 10px 30px rgba(0,0,0,.4),
+    0 26px 70px var(--chat-glow);
+  font: 400 13.5px/1.45 -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  opacity: 0; pointer-events: none;
+  transform: translateY(14px) scale(.92);
+  transform-origin: calc(100% - 30px) calc(100% + 70px);
+  transition:
+    opacity .2s ease,
+    transform .3s cubic-bezier(.5, 0, .7, .4);   /*  dichtklappen: kort en strak  */
+}
+
+.cipher-chat.is-open {
+  opacity: 1; pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity .25s ease,
+    transform .45s cubic-bezier(.3, 1.18, .5, 1);   /*  openen: zachte veer  */
+}
+
+/* gekleurde gradientrand */
+.cipher-chat::before {
+  content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px;
+  background: conic-gradient(from 210deg,
+    var(--chat-line) 0%,
+    rgba(255,235,175,.26) 30%,
+    rgba(214,180,85,.6) 62%,
+    var(--chat-line) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  opacity: .58; pointer-events: none;
+}
+
+/* zachte kleurzweem in de hoeken */
+.cipher-chat::after {
+  content: ""; position: absolute; inset: 0; border-radius: 24px;
+  background:
+    radial-gradient(ellipse 90% 40% at 20% -10%, rgba(246,212,81,.09) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 30% at 100% 110%, rgba(214,180,85,.06) 0%, transparent 62%);
+  pointer-events: none;
+}
+
+/* --- header --- */
+.chat-header {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 11px;
+  padding: 14px 14px 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.chat-avatar {
+  position: relative; width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background:
+    radial-gradient(circle 3px at 30% 20%, #fff 0%, transparent 70%),
+    radial-gradient(ellipse 52% 24% at 50% 100%, rgba(255,179,71,.85) 0%, transparent 45%),
+    radial-gradient(circle at 33% 25%, #eedfff 0%, #b48fff 20%, var(--violet) 42%, var(--saffier) 64%, #0e1d9e 82%, #6b4c20 100%);
+  box-shadow:
+    inset 0 1px 1px var(--white-soft),
+    inset -4px -5px 8px rgba(40,0,70,.7),
+    inset 0 -2px 3px rgba(255,215,0,.5),
+    0 2px 8px var(--orb-glow);
+}
+
+.chat-avatar::before {
+  content: ""; position: absolute; top: 11px; left: 11px;
+  width: 2.5px; height: 7px; border-radius: 999px;
+  background: #fff; box-shadow: 6px 0 0 #fff;
+  animation: blink 6s ease-in-out infinite;
+}
+
+.chat-id { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.chat-name { color: var(--gold); font-weight: 600; font-size: 14px; letter-spacing: -.01em; }
+
+.chat-status {
+  display: flex; align-items: center; gap: 5px;
+  color: rgba(236,234,228,.5); font-size: 11px;
+}
+
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #7de08a; box-shadow: 0 0 6px rgba(125,224,138,.8);
+  animation: statusPulse 2.6s ease-in-out infinite;
+}
+
+.chat-close {
+  margin-left: auto; width: 28px; height: 28px;
+  border: none; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+  color: rgba(236,234,228,.65); font-size: 14px; line-height: 1;
+  cursor: pointer; display: grid; place-items: center;
+  transition: background .2s, color .2s, transform .2s;
+}
+
+.chat-close:hover,
+.chat-close:focus-visible {
+  background: rgba(255,255,255,.12); color: var(--gold); transform: scale(1.08);
+}
+
+.chat-close:focus-visible {
+  outline: 2px solid rgba(246,212,81,.8); outline-offset: 2px;
+}
+
+/* --- berichten --- */
+.chat-messages {
+  position: relative; z-index: 1;
+  flex: 1; display: flex; flex-direction: column; gap: 8px;
+  padding: 16px 14px; overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: rgba(214,180,85,.38) transparent;
+}
+.chat-messages::-webkit-scrollbar { width: 5px; }
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(214,180,85,.38); border-radius: 999px;
+}
+
+.msg {
+  max-width: 80%; padding: 9px 14px; border-radius: 18px;
+  word-wrap: break-word;
+  animation: msgIn .35s cubic-bezier(.32,1.4,.6,1);
+}
+
+.msg--cipher {
+  align-self: flex-start;
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.075);
+  border-bottom-left-radius: 6px;
+  color: #eceae4;
+}
+
+.msg--user {
+  align-self: flex-end;
+  background: rgba(246,212,81,.13);
+  border: 1px solid rgba(246,212,81,.26);
+  border-bottom-right-radius: 6px;
+  color: #f6efd9;
+  box-shadow: 0 4px 16px rgba(214,180,85,.12);
+}
+
+.msg--typing {
+  display: flex; gap: 5px; align-items: center; padding: 12px 15px;
+}
+.msg--typing i {
+  width: 6px; height: 6px; border-radius: 50%;
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+.msg--typing i:nth-child(1) { background: rgba(246,212,81,.9); animation-delay: 0s; }
+.msg--typing i:nth-child(2) { background: rgba(214,180,85,.65); animation-delay: .15s; }
+.msg--typing i:nth-child(3) { background: rgba(214,180,85,.4); animation-delay: .3s; }
+
+/* --- invoer --- */
+.chat-input-row {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px 12px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.chat-input {
+  flex: 1; min-width: 0; padding: 10px 16px; border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,.05);
+  color: #f2f0ea; font: inherit; outline: none;
+  transition: border-color .25s, background .25s, box-shadow .25s;
+}
+.chat-input::placeholder { color: rgba(240,238,230,.36); }
+.chat-input:focus {
+  border-color: rgba(246,212,81,.5);
+  background: rgba(255,255,255,.07);
+  box-shadow: 0 0 0 3px rgba(246,212,81,.13);
+}
+
+.chat-send {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  color: rgba(246,212,81,.85);
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.11);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  transition: transform .2s, background .25s, border-color .25s, color .25s, box-shadow .25s;
+}
+
+.chat-send:hover,
+.chat-send:focus-visible {
+  transform: scale(1.06);
+  color: var(--gold-bright);
+  background: rgba(246,212,81,.14);
+  border-color: rgba(246,212,81,.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.1),
+    0 6px 18px rgba(214,180,85,.18);
+}
+
+.chat-send:focus-visible {
+  outline: 2px solid rgba(246,212,81,.8); outline-offset: 3px;
+}
+
+.chat-send svg { width: 16px; height: 16px; }
+
+
+
+/* ---------- Cipher-identiteit ---------- */
+.ai-identity {
+  position: absolute;
+  z-index: 5;
+  right: calc(100% + 12px);
+  bottom: 18px;
+  padding: 6px 9px;
+  background-color: rgba(18,18,20,.72);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(14px);
+          backdrop-filter: blur(14px);
+  font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: .2px;
+  color: rgba(255,255,255,.62);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(4px);
+  pointer-events: none;
+  animation: cipherIntro 5.4s ease 1.8s 1;
+  transition: opacity .2s ease, transform .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.ai-identity::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  background-color: var(--gold-bright);
+  border-radius: 50%;
+  vertical-align: 1px;
+}
+
+.ai-agent:hover .ai-identity,
+.ai-agent:focus-within .ai-identity,
+.ai-agent:has(.ai-button:hover) .ai-identity {
+  opacity: 1;
+  transform: translateX(0);
+  color: rgba(255,255,255,.78);
+  border-color: rgba(246,212,81,.16);
+}
+
+/* ---------- 5. Animaties ---------- */
+@keyframes floatOrb    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes shadowPulse { 0%,100% { transform: scale(1); opacity: .85; } 50% { transform: scale(.68); opacity: .45; } }
+@keyframes wispSpin    { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes rimSpin     { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes blink       { 0%,90%,100% { transform: scaleY(1); } 94% { transform: scaleY(.1); } }
+
+/* lichtveeg: rust het grootste deel van de cyclus, veegt dan één keer over */
+@keyframes glassSheen {
+  0%, 62%   { transform: translateX(-130%); }
+  86%, 100% { transform: translateX(130%); }
+}
+
+@keyframes statusPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(.75); opacity: .55; }
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: .5; }
+  40%           { transform: translateY(-4px); opacity: 1; }
+}
+
+@keyframes cipherIntro {
+  0% { opacity: 0; transform: translateX(4px); }
+  10%, 74% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(4px); }
+}
+
+/* ---------- 6. Responsive, toegankelijkheid & fallback ---------- */
+@media (max-width: 760px) {
+  .ai-agent {
+    right: max(18px, env(safe-area-inset-right));
+    bottom: max(18px, env(safe-area-inset-bottom));
+  }
+
+  .cipher-chat {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: calc(max(18px, env(safe-area-inset-bottom)) + var(--orb-size) + 24px);
+    width: min(420px, calc(100vw - 32px));
+    max-width: none;
+    height: min(420px, calc(100dvh - 140px));
+    max-height: none;
+    border-radius: 20px;
+    transform-origin: calc(100% - 28px) calc(100% + 54px);
+  }
+
+  .cipher-chat::before,
+  .cipher-chat::after {
+    border-radius: 20px;
+  }
+
+  .chat-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Kleiner en strakker verstuurrondje: 44px voelde bij het pilvormige
+     invoerveld te bol en te dominant aan. 40px blijft ruim aan te tikken
+     en oogt nu netjes naast de tekstbalk. */
+  .chat-send {
+    width: 40px;
+    height: 40px;
+  }
+
+  .chat-send svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .chat-input-row {
+    gap: 6px;
+  }
+
+  .chat-input {
+    min-height: 44px;
+    font-size: 16px; /* voorkomt dat mobiele browsers inzoomen bij het tikken in het veld */
+  }
+}
+
+@media (max-width: 430px) {
+  :root {
+    --orb-size: 50px;
+  }
+
+  .ai-agent {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+  }
+
+  .cipher-chat {
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + var(--orb-size) + 18px);
+    width: auto;
+    height: min(62dvh, 430px);
+    max-height: calc(100dvh - 104px);
+    border-radius: 18px;
+  }
+
+  .cipher-chat::before,
+  .cipher-chat::after {
+    border-radius: 18px;
+  }
+
+  .chat-header {
+    padding: 12px 10px 10px 12px;
+    gap: 9px;
+  }
+
+  .chat-messages {
+    padding: 14px 12px;
+  }
+
+  .msg {
+    max-width: 88%;
+  }
+
+  .chat-input-row {
+    padding: 9px 10px 10px;
+  }
+
+  .chat-input {
+    padding-inline: 14px;
+  }
+
+  .ai-bubble {
+    right: 0;
+    max-width: min(200px, calc(100vw - 28px));
+    /* Op desktop is 999px een pil rond één regel tekst; zodra de tekst
+       hier gaat wraplen (white-space: normal) maakt datzelfde radius er
+       een raar rond blobje van. Een gewoon spreekbelletje-radius past
+       beter bij een blok van meerdere regels. */
+    border-radius: 16px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .ai-identity {
+    right: calc(100% + 8px);
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .ai-identity {
+    display: none;
+  }
+
+  .chat-name {
+    font-size: 13px;
+  }
+
+  .chat-status {
+    font-size: 10.5px;
+  }
+}
+
+@media (max-width: 760px) and (max-height: 620px) {
+  .cipher-chat {
+    top: max(10px, env(safe-area-inset-top));
+    bottom: calc(max(12px, env(safe-area-inset-bottom)) + var(--orb-size) + 16px);
+    height: auto;
+    max-height: none;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-float, .orb-shadow, .orb-aura::before, .orb-aura::after,
+  .ai-button::before, .orb-glass::before, .orb-glass::after,
+  .chat-avatar::before, .status-dot, .msg, .ai-identity { animation: none; }
+
+  /* zonder animatie de lichtveeg helemaal verbergen */
+  .orb-glass::after { opacity: 0; }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .ai-bubble, .cipher-chat { background: rgba(10,16,34,.92); }
+}

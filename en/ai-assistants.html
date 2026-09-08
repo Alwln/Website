@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!--Visitors-->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="54e94f85-6ab1-467a-a15d-e90e47359dc5"></script>
+
+    <!-- Standaard opmaak -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Alleen de progressive-enhancement vlag staat vroeg. De animatielogica
+         zelf laadt deferred en blokkeert de eerste render niet. -->
+    <script>document.documentElement.classList.add("js");</script>
+
+    <title>AI Assistant for Your Website, Utrecht, from &euro;750 | AvdB</title>
+    <meta name="description" content="An AI assistant built in Utrecht from &euro;750 excl. VAT. It answers from your own information, works on an existing website, and would rather say it doesn't know than guess.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#000000">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="canonical" href="https://avdbsecurity.com/en/ai-assistants.html">
+
+    <!-- Dezelfde pagina in de andere taal -->
+    <link rel="alternate" hreflang="nl" href="https://avdbsecurity.com/HTML/agent.html">
+    <link rel="alternate" hreflang="en" href="https://avdbsecurity.com/en/ai-assistants.html">
+    <link rel="alternate" hreflang="x-default" href="https://avdbsecurity.com/HTML/agent.html">
+
+    <!-- Delen -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:locale:alternate" content="nl_NL">
+    <meta property="og:site_name" content="AvdB Security &amp; Protection">
+    <meta property="og:title" content="AI Assistant for Your Website, Utrecht, from &euro;750 | AvdB">
+    <meta property="og:description" content="An AI assistant for your website from &euro;750 excl. VAT. Built around your own information and just as usable on the site you already have.">
+    <meta property="og:url" content="https://avdbsecurity.com/en/ai-assistants.html">
+    <meta property="og:image" content="https://avdbsecurity.com/Images/Share-agent.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AvdB AI assistant — answers from your own information, from &euro;750">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Assistant for Your Website, Utrecht, from &euro;750 | AvdB">
+    <meta name="twitter:description" content="An AI assistant for your website from &euro;750 excl. VAT. Built around your own information and just as usable on the site you already have.">
+    <meta name="twitter:image" content="https://avdbsecurity.com/Images/Share-agent.png">
+    <meta name="twitter:image:alt" content="AvdB AI assistant — answers from your own information, from &euro;750">
+
+    <!-- CSS — responsive.css staat bewust als laatste -->
+    <link rel="stylesheet" href="../CSS/shared.css">
+    <link rel="stylesheet" href="../CSS/agent.css">
+    <link rel="stylesheet" href="../AI-Agent/cipher.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+
+    <!-- Javascript -->
+    <script src="../AI-Agent/cipher.js" defer></script>
+    <script src="../Javascript/shared.js" defer></script>
+    <script src="../Javascript/agent.js" defer></script>
+    <script src="../Javascript/lang.js" defer></script>
+<!-- Volgende pagina alvast ophalen zodra de bezoeker die kant op wijst -->
+    <script type="speculationrules">
+        { "prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }] }
+    </script>
+
+    <!-- De dienst, het kruimelpad en de vragen die op deze pagina zichtbaar staan.
+         De vragen staan hier alleen omdat ze ook echt in de FAQ hieronder staan. -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Service",
+                "@id": "https://avdbsecurity.com/en/ai-assistants.html#service",
+                "name": "AI assistants for websites",
+                "serviceType": "AI assistant",
+                "description": "An AI assistant for websites, from €750 excl. VAT to set up. After that it is pay as you go: you are only billed for what you use.",
+                "inLanguage": "en",
+                "provider": { "@id": "https://avdbsecurity.com/#business" },
+                "areaServed": {
+                    "@type": "Country",
+                    "name": "Netherlands"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "750",
+                    "description": "Starting price to set the assistant up. After that it is pay as you go: you are only billed for what you actually use.",
+                    "priceCurrency": "EUR",
+                    "valueAddedTaxIncluded": false,
+                    "url": "https://avdbsecurity.com/en/ai-assistants.html"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://avdbsecurity.com/en/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "AI assistants",
+                        "item": "https://avdbsecurity.com/en/ai-assistants.html"
+                    }
+                ]
+            },
+            {
+                "@type": "FAQPage",
+                "@id": "https://avdbsecurity.com/en/ai-assistants.html#faq",
+                "inLanguage": "en",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Can the assistant go on my existing website?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. The assistant can be set up separately from a new website, as long as it can be placed on your site."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What happens when it doesn't know something?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Then it says so. I set it up so that an answer has to be grounded in your information. If that grounding is missing, it stops rather than inventing certainty of its own."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can it say things that are wrong?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "An AI assistant can make mistakes. That is why it gets a clearly bounded knowledge base and instructions not to guess beyond that information."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How long does it take to set up?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "That depends on how much the assistant needs to know and how complete that information already is. We agree up front what goes in and when the first version is ready to test."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How are the usage costs calculated?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Building it starts from €750 excl. VAT. After that it is pay as you go: you are only billed for what you use. So the amount differs per month and is invoiced monthly in arrears."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I switch it off later?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. The assistant can be taken off the site later. For as long as it is running, you only pay for what is actually used."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+
+</head>
+
+
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<section class="Menu-Section">
+
+    <nav class="navbar" aria-label="Main navigation">
+
+        <div class="navbar-logo">
+            <img alt="AvdB logo" src="../Images/Logo.webp">
+            <a href="index.html">AvdB Security &amp; Protection</a>
+        </div>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">
+            <span class="nav-toggle-icon" aria-hidden="true">
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+
+        <div class="nav-links" id="primary-navigation">
+            <a href="websites.html" class="Websites">Websites</a>
+            <a href="ai-assistants.html" class="AI-assistents" aria-current="page">AI assistants</a>
+            <a href="about.html" class="over-ons">About</a>
+            <a href="contact.html" class="Contact">Contact</a>
+        </div>
+    </nav>
+
+</section>
+
+
+<!-- =========================
+     TAALKEUZE
+     Staat los van de navigatiebalk: een eigen knop rechtsboven
+     op de pagina. Vormgeving in shared.css.
+========================= -->
+
+<a class="lang-switch" href="../HTML/agent.html" hreflang="nl" lang="nl"
+   aria-label="Bekijk deze pagina in het Nederlands">NL</a>
+
+
+
+<main id="main-content">
+
+
+<!-- =========================
+     HERO
+     Gecentreerd, breed en minimalistisch. Alleen typografie,
+     ruimte en één duidelijke actie.
+========================= -->
+
+<section class="agent-hero-section" aria-labelledby="agent-hero-title">
+
+    <div class="agent-hero-shell">
+
+        <div class="agent-hero-copy">
+
+            <span class="agent-hero-label">An AI assistant for your website</span>
+
+            <h1 id="agent-hero-title">
+                An answer at the moment someone<br>
+                doesn't want to search or wait<span class="accent-dot">.</span>
+            </h1>
+
+            <p class="agent-hero-lede">
+                Cipher helps visitors straight away with their first questions, so things become clear sooner
+                and personal contact is only needed when it actually adds something.
+            </p>
+
+            <a class="website-cta agent-hero-cta" href="#aiButton" data-agent-open>
+                Try Cipher <span aria-hidden="true">→</span>
+            </a>
+
+            <p class="agent-hero-foot">
+                from &euro; 750 excl. VAT <span aria-hidden="true">·</span>
+                can also be added to your current website
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DEMO
+     Geen tweede chat. Deze vragen sturen het bestaande Cipher-paneel aan.
+========================= -->
+
+<section class="agent-demo-section" id="agent-demo" aria-labelledby="agent-demo-title">
+
+    <div class="agent-demo-box" data-onthul>
+
+        <div class="agent-demo-frame">
+
+            <div class="agent-demo-kop">
+                <span class="agent-demo-status" aria-hidden="true"></span>
+                <span>Cipher on this page</span>
+            </div>
+
+            <div class="agent-demo-gesprek">
+                <p class="agent-demo-vraag">So what can an assistant like this actually answer?</p>
+                <h2 id="agent-demo-title">Try it with the assistant that's already here<span class="accent-dot">.</span></h2>
+                <p>The questions below open Cipher in the bottom right. There's no separate demo window.</p>
+            </div>
+
+        </div>
+
+        <div class="agent-demo-vragen" aria-label="Example questions for Cipher">
+            <a href="#aiButton" class="agent-demo-pill" data-agent-vraag="What does a custom website cost?">What does a custom website cost?</a>
+            <a href="#aiButton" class="agent-demo-pill" data-agent-vraag="How soon can my website go live?">How soon can my website go live?</a>
+            <a href="#aiButton" class="agent-demo-pill" data-agent-vraag="Can I have things changed later on?">Can I have things changed later on?</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     IS DIT IETS VOOR JOU?
+     Een rustige afweging in één paneel.
+========================= -->
+
+<section class="agent-fit-section" id="agent-fit" aria-labelledby="agent-fit-title">
+
+    <div class="agent-fit-box" data-onthul>
+
+        <div class="agent-fit-intro">
+            <h2 id="agent-fit-title">Is this something for you<span class="accent-dot">?</span></h2>
+            <p>An assistant isn't a goal in itself. It only earns its place when visitors keep asking the same questions and don't want to wait for an answer. Here's what that usually looks like.</p>
+        </div>
+
+        <div class="agent-fit-vergelijking">
+
+            <div class="agent-fit-kolom">
+
+                <p class="agent-fit-head agent-fit-head-ja">Worth it when</p>
+
+                <ul class="agent-fit-lijst">
+
+                    <li>
+                        <span class="agent-fit-merk agent-fit-ja" aria-hidden="true">
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M0.8 6.4 4.2 9.8 11.2 1.9"/></svg>
+                        </span>
+                        <div>
+                            <strong>The same questions keep coming back.</strong>
+                            <p>About prices, how you work, delivery times or what someone needs to supply.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="agent-fit-merk agent-fit-ja" aria-hidden="true">
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M0.8 6.4 4.2 9.8 11.2 1.9"/></svg>
+                        </span>
+                        <div>
+                            <strong>Visitors want clarity before they get in touch.</strong>
+                            <p>Almost nobody sends an email over one short question. That visitor clicks away.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="agent-fit-merk agent-fit-ja" aria-hidden="true">
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M0.8 6.4 4.2 9.8 11.2 1.9"/></svg>
+                        </span>
+                        <div>
+                            <strong>Your information has clear boundaries.</strong>
+                            <p>What the assistant needs to know is largely settled and doesn't change daily.</p>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="agent-fit-kolom agent-fit-kolom-rustig">
+
+                <p class="agent-fit-head agent-fit-head-nee">Less urgent when</p>
+
+                <ul class="agent-fit-lijst">
+
+                    <li>
+                        <span class="agent-fit-merk agent-fit-nee" aria-hidden="true">
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M1.9 1.9 10.1 10.1"/><path d="M10.1 1.9 1.9 10.1"/></svg>
+                        </span>
+                        <div>
+                            <strong>You almost never get a question you've answered before.</strong>
+                            <p>Every enquiry is so specific that it needs a conversation either way.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="agent-fit-merk agent-fit-nee" aria-hidden="true">
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M1.9 1.9 10.1 10.1"/><path d="M10.1 1.9 1.9 10.1"/></svg>
+                        </span>
+                        <div>
+                            <strong>You're reachable around the clock.</strong>
+                            <p>Anyone who calls or emails has an answer within minutes, outside office hours too.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="agent-fit-merk agent-fit-nee" aria-hidden="true">
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M1.9 1.9 10.1 10.1"/><path d="M10.1 1.9 1.9 10.1"/></svg>
+                        </span>
+                        <div>
+                            <strong>Everything is already unmistakably on one page.</strong>
+                            <p>Visitors find what they need without searching and don't drop off there.</p>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <p class="agent-fit-noot">In practice the right-hand column rarely applies all the way. Questions come back more often than you'd think, and most visitors don't email — they click away. Not sure? Tell me about your situation. If an assistant adds little, I'll just say so.</p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     KENNIS EN GRENS
+     Eenvoudig en rustig: wel genoeg basis, of niet.
+========================= -->
+
+<section class="agent-kennis-section" id="agent-kennis" aria-labelledby="agent-kennis-title">
+
+    <div class="agent-kennis-box" data-onthul>
+
+        <div class="agent-kennis-intro">
+            <h2 id="agent-kennis-title">Giving answers, not inventing them<span class="accent-dot">.</span></h2>
+            <p>That's what it's for: answering questions at moments when you can't. It does that with the information you supply. If a question is unclear, or the answer isn't in there, it says so and points the visitor onwards — instead of making up something that isn't true.</p>
+        </div>
+
+        <div class="agent-kennis-panelen">
+
+            <div class="agent-kennis-paneel">
+                <span class="agent-kennis-merk">Most of the time</span>
+                <strong>The question falls within your information</strong>
+                <p>Then the visitor simply gets an answer: straight away, in plain language and without a sales pitch.</p>
+            </div>
+
+            <div class="agent-kennis-paneel">
+                <span class="agent-kennis-merk">When in doubt</span>
+                <strong>The question is unclear or falls outside it</strong>
+                <p>Then it asks a follow-up question or refers the visitor to you. No invented answer for you to correct later.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     WAT ER MAKKELIJKER WORDT
+     Geen verzonnen cijfers. Alleen concrete winst voor de bezoeker.
+========================= -->
+
+<section class="agent-resultaat-section" aria-labelledby="agent-resultaat-title">
+
+    <div class="agent-resultaat-box" data-onthul>
+
+        <div class="agent-resultaat-intro">
+            <h2 id="agent-resultaat-title">What gets easier for your visitor<span class="accent-dot">?</span></h2>
+            <p>Not more features for the sake of features. Mainly fewer steps between a question and the information that's already on your website.</p>
+        </div>
+
+        <dl class="agent-resultaat-rij">
+
+            <div>
+                <dt>Less searching</dt>
+                <dd>A visitor can simply ask the question, without first finding the right page or the right heading.</dd>
+            </div>
+
+            <div>
+                <dt>Clarity sooner</dt>
+                <dd>Recurring questions can be answered immediately, using the information you set out in advance.</dd>
+            </div>
+
+            <div>
+                <dt>Also when you don't reply</dt>
+                <dd>The same basic information stays available outside your working hours, without pretending personal contact is no longer needed.</dd>
+            </div>
+
+        </dl>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PRIJS
+     De bouw staat vast. Daarna volgt alleen het daadwerkelijke gebruik.
+========================= -->
+
+<section class="agent-prijs-section" aria-labelledby="agent-prijs-title">
+
+    <div class="agent-prijs-box" data-onthul>
+
+        <div class="agent-prijs-kop">
+            <h2 id="agent-prijs-title">What does the assistant cost<span class="accent-dot">?</span></h2>
+            <p>Setting it up starts from &euro; 750 excl. VAT. After that it's pay as you go: you're only billed for what you use. No fixed monthly fee and no contract that rolls on.</p>
+        </div>
+
+        <div class="agent-prijs-kaart">
+
+            <div class="agent-prijs-deel agent-prijs-eenmalig">
+                <span class="agent-prijs-label">Setting up</span>
+                <p class="agent-prijs-bedrag"><small>from</small> &euro; 750</p>
+                <p class="agent-prijs-meta">excl. VAT · to set up, scope and test the assistant</p>
+            </div>
+
+            <div class="agent-prijs-deel agent-prijs-maand">
+                <span class="agent-prijs-label">Usage</span>
+                <p class="agent-prijs-bedrag agent-prijs-gebruik">Pay as<br>you go</p>
+                <p class="agent-prijs-meta">excl. VAT · you're only billed for what you use · monthly, in arrears</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     VEELGESTELDE VRAGEN
+========================= -->
+
+<section class="faq-section" aria-labelledby="faq-title">
+
+    <div class="faq-box" data-onthul>
+
+        <!-- Kop -->
+
+        <div class="faq-kop">
+
+            <span class="section-eyebrow">Frequently asked questions</span>
+
+            <h2 id="faq-title">Anything else you'd like to know<span class="accent-dot">?</span></h2>
+
+        </div>
+
+
+        <!-- Vragen -->
+
+        <div class="faq-lijst">
+
+            <details>
+                <summary>Can the assistant go on my existing website?</summary>
+                <p>Yes. The assistant can be set up separately from a new website, as long as it can be placed on your site.</p>
+            </details>
+
+            <details>
+                <summary>What happens when it doesn't know something?</summary>
+                <p>Then it says so. I set it up so that an answer has to be grounded in your information. If that grounding is missing, it stops rather than inventing certainty of its own.</p>
+            </details>
+
+            <details>
+                <summary>Can it say things that are wrong?</summary>
+                <p>An AI assistant can make mistakes. That's why it gets a clearly bounded knowledge base and instructions not to guess beyond that information.</p>
+            </details>
+
+            <details>
+                <summary>How long does it take to set up?</summary>
+                <p>That depends on how much the assistant needs to know and how complete that information already is. We agree up front what goes in and when the first version is ready to test.</p>
+            </details>
+
+            <details>
+                <summary>How are the usage costs calculated?</summary>
+                <p>Building it starts from &euro; 750 excl. VAT. After that it's pay as you go: you're only billed for what you use. So the amount differs per month and is invoiced monthly in arrears.</p>
+            </details>
+
+            <details>
+                <summary>Can I switch it off later?</summary>
+                <p>Yes. The assistant can be taken off the site later. For as long as it's running, you only pay for what's actually used.</p>
+            </details>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SLOT
+========================= -->
+
+<section class="agent-slot-section" aria-labelledby="agent-slot-title">
+
+    <div class="agent-slot-box" data-onthul>
+
+        <h2 id="agent-slot-title">Ask it something first. Then decide<span class="accent-dot">.</span></h2>
+        <p>Open Cipher here on the page, or send me your situation if you want to know whether an assistant would add anything.</p>
+
+        <div class="agent-slot-acties">
+            <a href="#aiButton" class="website-cta" data-agent-open>Open the assistant <span aria-hidden="true">→</span></a>
+            <a href="contact.html" class="agent-slot-link">Get in touch <span aria-hidden="true">→</span></a>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-inhoud">
+
+        <nav class="footer-socials-top" aria-label="Social media">
+            <ul class="footer-socials">
+                <li>
+                    <a href="https://www.instagram.com/_avdb_security?stkn=MTlmdTVrdjB6cWc0Yg==" class="social" target="_blank" rel="noopener noreferrer" aria-label="AvdB on Instagram">
+                        <img alt="" src="../Images/Instagram-Logo.png" loading="lazy" decoding="async">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/share/1LffGFcDxY/" class="social" target="_blank" rel="noopener noreferrer" aria-label="AvdB on Facebook">
+                        <img alt="" src="../Images/Facebook-Logo.png" loading="lazy" decoding="async">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tiktok.com/@avdb.security.protection?_r=1&amp;_t=ZN-99Xe1ojR2P8" class="social" target="_blank" rel="noopener noreferrer" aria-label="AvdB on TikTok">
+                        <img alt="" src="../Images/Tiktok-Logo.png" loading="lazy" decoding="async">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="footer-regel footer-primary">
+            <a href="index.html" class="footer-logo">
+                <img alt="AvdB logo" src="../Images/Logo.webp" loading="lazy" decoding="async">
+                <span class="footer-naam">AvdB Security &amp; Protection</span>
+            </a>
+
+            <nav class="footer-legal" aria-label="Privacy and legal information">
+                <a href="privacy.html" class="footer-legal-link">Privacy</a>
+                <a href="cookies.html" class="footer-legal-link">Cookies</a>
+            </nav>
+        </div>
+
+        <div class="footer-regel footer-meta">
+            <span>&copy; 2026 AvdB Security &amp; Protection &middot; CoC 99972654</span>
+
+            <div class="footer-contact" aria-label="Contact details">
+                <a href="tel:+31643115610">+31 6 43 11 56 10</a>
+                <span aria-hidden="true">·</span>
+                <a href="mailto:contact@avdbsecurity.com">contact@avdbsecurity.com</a>
+            </div>
+
+            <span class="footer-signatuur">Utrecht, Netherlands</span>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     AI AGENT — SVG-filter voor de aura
+========================= -->
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+
+    <filter id="orbWisp" x="-60%" y="-60%" width="220%" height="220%">
+
+        <feTurbulence type="fractalNoise" baseFrequency="0.014 0.028" numOctaves="2" seed="7" result="noise">
+            <animate attributeName="baseFrequency" values="0.014 0.028; 0.018 0.022; 0.014 0.028" dur="16s" repeatCount="indefinite"/>
+        </feTurbulence>
+
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G"/>
+
+    </filter>
+
+</svg>
+
+
+<!-- =========================
+     CHATPANEEL
+========================= -->
+
+<section class="cipher-chat" id="cipherChat" role="dialog" aria-labelledby="cipherChatTitle">
+
+    <header class="chat-header">
+
+        <span class="chat-avatar" aria-hidden="true"></span>
+
+        <div class="chat-id">
+
+            <span class="chat-name" id="cipherChatTitle">Cipher</span>
+
+            <span class="chat-status">
+                <span class="status-dot" aria-hidden="true"></span>
+                online
+            </span>
+
+        </div>
+
+        <button class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+
+    </header>
+
+    <div class="chat-privacy-note" role="note">
+        <strong>AI assistant.</strong>
+        You're talking to AI, not a person. Answers can contain mistakes.
+        Please don't share special-category or confidential personal data.
+        <a href="privacy.html#ai-assistant-cipher">Privacy</a>
+    </div>
+
+
+    <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+
+
+    <footer class="chat-input-row">
+
+        <label class="sr-only" for="chatInput">Ask Cipher a question</label>
+        <input class="chat-input" id="chatInput" type="text" placeholder="Ask Cipher something…" autocomplete="off">
+
+        <button class="chat-send" id="chatSend" aria-label="Send message">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 19V5"/>
+                <path d="M5 12l7-7 7 7"/>
+            </svg>
+        </button>
+
+    </footer>
+
+</section>
+
+
+<!-- =========================
+     AI KNOP
+========================= -->
+
+<div class="ai-agent" id="aiAgent">
+
+    <div class="ai-bubble" id="aiBubble" role="status" aria-live="polite"></div>
+
+    <span class="ai-identity" aria-hidden="true">Cipher · AI assistant</span>
+
+    <div class="orb-float">
+
+        <span class="orb-aura"></span>
+
+        <button class="ai-button" id="aiButton" aria-label="Open Cipher AI assistant">
+            <span class="orb-glass"></span>
+        </button>
+
+    </div>
+
+    <span class="orb-shadow"></span>
+
+</div>
+
+
+</body>
+
+</html>

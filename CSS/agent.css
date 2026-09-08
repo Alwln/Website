@@ -1,0 +1,971 @@
+/* AI-ASSISTENTEN — Iedere sectie krijgt een eigen vorm. De pagina legt eerst uit wat de assistent doet, waar de grens ligt en pas daarna de prijs. */
+
+/* PAGINATOKENS — Aanvulling op shared.css, alleen voor deze pagina. */
+
+:root {
+    --agent-breed: min(calc(100% - (2 * var(--site-gutter))), 1120px);
+    --agent-lees: 760px;
+    --agent-lijn: rgba(255, 255, 255, 0.075);
+    --agent-lijn-zacht: rgba(255, 255, 255, 0.05);
+    --agent-ruimte: clamp(94px, 12vw, 178px);
+    --agent-rood: rgba(214, 88, 78, 0.78);
+}
+
+/* GEDEELD OP DEZE PAGINA */
+
+.agent-hero-section,
+.agent-demo-section,
+.agent-fit-section,
+.agent-kennis-section,
+.agent-resultaat-section,
+.agent-prijs-section,
+.agent-slot-section {
+    position: relative;
+    z-index: 2;
+    font-family: var(--avdb-font-sans), sans-serif;
+}
+
+.agent-demo-section,
+.agent-fit-section,
+.agent-kennis-section,
+.agent-resultaat-section,
+.agent-prijs-section {
+    padding: 0 0 var(--agent-ruimte);
+}
+
+/* De FAQ-regels hieronder komen ongewijzigd uit websites.css en gebruiken
+   daarom lokaal dezelfde variabelenamen als daar. De paginatokens blijven --agent-*.
+*/
+
+.faq-section {
+    --web-breed: var(--agent-breed);
+    --web-lees: var(--agent-lees);
+    --web-lijn: var(--agent-lijn);
+    --web-lijn-zacht: var(--agent-lijn-zacht);
+    --web-ruimte: var(--agent-ruimte);
+}
+
+.faq-section {
+    position: relative;
+    z-index: 2;
+    font-family: var(--avdb-font-sans), sans-serif;
+}
+
+.faq-section {
+    padding: 0 0 var(--web-ruimte);
+}
+
+/* Rustige instap. Zonder Javascript staat alles gewoon zichtbaar. */
+
+.js [data-onthul] { opacity: 0; transform: translateY(14px); }
+
+.js [data-onthul].in-beeld { animation: agent-in 0.85s var(--avdb-ease) forwards; }
+
+/* HERO — Gecentreerd, breed en minimalistisch. */
+
+.agent-hero-section {
+    min-height: calc(100svh - 74px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(108px, 15vh, 168px) 0 clamp(104px, 14vh, 158px);
+}
+
+.agent-hero-shell {
+    position: relative;
+    z-index: 2;
+    width: min(calc(100% - (2 * var(--site-gutter))), 1180px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.agent-hero-copy {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.agent-hero-label {
+    display: block;
+    margin-bottom: 28px;
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 1.45px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.agent-hero-copy h1 {
+    max-width: 22ch;
+    margin: 0 auto;
+    font-size: clamp(36px, 3.7vw, 50px);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -1.2px;
+    color: var(--avdb-text);
+}
+
+.agent-hero-lede {
+    max-width: 62ch;
+    margin: 34px auto 0;
+    font-size: clamp(15px, 1.02vw, 16.5px);
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.48);
+}
+
+.agent-hero-cta {
+    margin-top: 44px;
+}
+
+.agent-hero-foot {
+    margin-top: 30px;
+    font-size: 11.5px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.36);
+}
+
+.agent-hero-foot span {
+    margin: 0 7px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* DEMO — Een gesprek als kader, maar het echte gesprek blijft Cipher rechtsonder. */
+
+.agent-demo-box {
+    width: var(--agent-breed);
+    margin: 0 auto;
+}
+
+.agent-demo-frame {
+    position: relative;
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 24px;
+    background: rgba(16, 16, 19, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055), 0 36px 70px -48px rgba(0, 0, 0, 0.95);
+}
+
+.agent-demo-frame::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 16%;
+    right: 16%;
+    height: 1px;
+    background: var(--glans);
+}
+
+.agent-demo-kop {
+    min-height: 48px;
+    padding: 0 clamp(18px, 3vw, 28px);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border-bottom: 1px solid var(--agent-lijn-zacht);
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.agent-demo-status {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 16px rgba(246, 212, 81, 0.5);
+}
+
+.agent-demo-gesprek {
+    padding: clamp(38px, 6vw, 70px) clamp(22px, 6vw, 76px);
+}
+
+.agent-demo-vraag {
+    width: fit-content;
+    max-width: 70%;
+    margin-left: auto;
+    padding: 11px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 17px 17px 5px 17px;
+    background: rgba(255, 255, 255, 0.035);
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.48);
+}
+
+.agent-demo-gesprek h2 {
+    max-width: 19ch;
+    margin-top: clamp(34px, 4vw, 50px);
+    font-size: clamp(28px, 3.6vw, 46px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -1.5px;
+    color: var(--avdb-text);
+}
+
+.agent-demo-gesprek > p:last-child {
+    max-width: 50ch;
+    margin-top: 18px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.43);
+}
+
+.agent-demo-vragen {
+    max-width: 900px;
+    margin: 20px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.agent-demo-pill {
+    min-height: var(--touch-target);
+    padding: 10px 15px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(246, 212, 81, 0.22);
+    border-radius: var(--avdb-pill);
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.68);
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.agent-demo-pill:hover {
+    border-color: rgba(246, 212, 81, 0.65);
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.agent-demo-pill:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 4px;
+}
+
+/* IS DIT IETS VOOR JOU? — Twee kolommen in dezelfde zwarte tegel. Eén regel per punt, met een gouden vinkje of een rood kruisje ervoor. */
+
+.agent-fit-box {
+    width: var(--agent-breed);
+    margin: 0 auto;
+}
+
+.agent-fit-intro {
+    max-width: 760px;
+    margin-bottom: clamp(36px, 5vw, 58px);
+}
+
+.agent-fit-intro h2 {
+    max-width: 14ch;
+    margin-top: 15px;
+    font-size: clamp(31px, 4vw, 51px);
+    font-weight: 500;
+    line-height: 1.03;
+    letter-spacing: -1.75px;
+    color: var(--avdb-text);
+}
+
+.agent-fit-intro p {
+    max-width: 60ch;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.78;
+    color: rgba(255, 255, 255, 0.44);
+}
+
+.agent-fit-vergelijking {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    background-color: #101012;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+}
+
+.agent-fit-kolom {
+    --agent-fit-marge: clamp(24px, 3vw, 34px);
+    min-width: 0;
+    padding: 0 var(--agent-fit-marge) clamp(14px, 1.8vw, 20px);
+}
+
+.agent-fit-kolom + .agent-fit-kolom { border-left: 1px solid var(--agent-lijn); }
+
+.agent-fit-head {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    margin: 0 calc(-1 * var(--agent-fit-marge));
+    padding: 0 var(--agent-fit-marge);
+    border-bottom: 1px solid var(--agent-lijn);
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.agent-fit-head-ja { color: rgba(246, 212, 81, 0.66); }
+.agent-fit-head-nee { color: rgba(255, 255, 255, 0.32); }
+
+.agent-fit-lijst { list-style: none; }
+
+.agent-fit-lijst li {
+    display: grid;
+    grid-template-columns: 12px minmax(0, 1fr);
+    align-items: start;
+    gap: 15px;
+    padding: clamp(20px, 2.3vw, 25px) 0;
+}
+
+.agent-fit-lijst li + li { border-top: 1px solid rgba(255, 255, 255, 0.038); }
+
+.agent-fit-lijst strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.55;
+    color: #e6e6e4;
+}
+
+.agent-fit-lijst p {
+    max-width: 42ch;
+    margin-top: 7px;
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.38);
+}
+
+.agent-fit-kolom-rustig .agent-fit-lijst strong { color: rgba(255, 255, 255, 0.58); }
+.agent-fit-kolom-rustig .agent-fit-lijst p { color: rgba(255, 255, 255, 0.32); }
+
+.agent-fit-merk {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin-top: 5px;
+}
+
+.agent-fit-merk svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.agent-fit-ja { color: rgba(246, 212, 81, 0.85); }
+.agent-fit-nee { color: var(--agent-rood); }
+
+.agent-fit-noot {
+    max-width: 72ch;
+    margin-top: 22px;
+    font-size: 11.5px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* KENNIS EN GRENS — Geen procesdiagram: twee rustige panelen met één duidelijke grens. */
+
+.agent-kennis-section { overflow: hidden; }
+
+/* De enige gloed op de pagina, achter de kennis-sectie. */
+
+.agent-kennis-section::before {
+    content: "";
+    position: absolute;
+    width: var(--agent-gloed-w);
+    max-width: var(--agent-gloed-max);
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(246, 212, 81, var(--agent-gloed-a)) 0%, transparent var(--agent-gloed-stop));
+    pointer-events: none;
+    z-index: 0;
+    --agent-gloed-w: 46vw;
+    --agent-gloed-max: 620px;
+    --agent-gloed-a: 0.035;
+    --agent-gloed-stop: 72%;
+    top: 8%;
+    left: -18%;
+}
+
+.agent-kennis-box {
+    position: relative;
+    z-index: 2;
+    width: var(--agent-breed);
+    margin: 0 auto;
+}
+
+.agent-kennis-intro { max-width: 760px; }
+
+.agent-kennis-intro h2 {
+    max-width: 19ch;
+    margin-top: 15px;
+    font-size: clamp(31px, 4vw, 51px);
+    font-weight: 500;
+    line-height: 1.03;
+    letter-spacing: -1.75px;
+    color: var(--avdb-text);
+}
+
+.agent-kennis-intro p {
+    max-width: 58ch;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.78;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.agent-kennis-panelen {
+    margin-top: clamp(42px, 6vw, 68px);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    background-color: #101012;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+}
+
+.agent-kennis-paneel {
+    min-width: 0;
+    padding: clamp(26px, 3.6vw, 38px) clamp(24px, 3.5vw, 38px);
+}
+
+.agent-kennis-paneel + .agent-kennis-paneel { border-left: 1px solid var(--agent-lijn); }
+
+.agent-kennis-merk {
+    display: block;
+    margin-bottom: 15px;
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: rgba(246, 212, 81, 0.62);
+}
+
+.agent-kennis-paneel + .agent-kennis-paneel .agent-kennis-merk { color: rgba(255, 255, 255, 0.32); }
+
+.agent-kennis-paneel strong {
+    display: block;
+    max-width: 32ch;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.agent-kennis-paneel p {
+    max-width: 42ch;
+    margin-top: 10px;
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: rgba(255, 255, 255, 0.39);
+}
+
+/* WAT ER MAKKELIJKER WORDT — Drie concrete gevolgen als definitielijst, zonder kaarten of verkooppraat. */
+
+.agent-resultaat-box {
+    width: var(--agent-breed);
+    margin: 0 auto;
+}
+
+.agent-resultaat-intro {
+    max-width: 760px;
+    margin-bottom: clamp(34px, 5vw, 56px);
+}
+
+.agent-resultaat-intro h2 {
+    max-width: 16ch;
+    font-size: clamp(30px, 3.9vw, 49px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -1.65px;
+    color: var(--avdb-text);
+}
+
+.agent-resultaat-intro p {
+    max-width: 56ch;
+    margin-top: 18px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.78;
+    color: rgba(255, 255, 255, 0.43);
+}
+
+.agent-resultaat-rij {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--agent-lijn);
+    border-bottom: 1px solid var(--agent-lijn);
+}
+
+.agent-resultaat-rij > div {
+    min-width: 0;
+    padding: clamp(28px, 3.6vw, 40px) clamp(24px, 3.6vw, 42px) clamp(30px, 3.8vw, 42px) 0;
+}
+
+.agent-resultaat-rij > div + div {
+    padding-left: clamp(24px, 3.6vw, 42px);
+    border-left: 1px solid var(--agent-lijn-zacht);
+}
+
+.agent-resultaat-rij dt {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.agent-resultaat-rij dd {
+    max-width: 36ch;
+    margin-top: 14px;
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: rgba(255, 255, 255, 0.38);
+}
+
+/* PRIJS — Startprijs voor de bouw. Daarna alleen variabele gebruikskosten per maand. */
+
+.agent-prijs-box {
+    width: var(--agent-breed);
+    margin: 0 auto;
+}
+
+.agent-prijs-kop {
+    max-width: 760px;
+    margin-bottom: clamp(30px, 4vw, 46px);
+}
+
+.agent-prijs-kop h2 {
+    font-size: clamp(30px, 4vw, 50px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -1.7px;
+    color: var(--avdb-text);
+}
+
+.agent-prijs-kop p {
+    max-width: 64ch;
+    margin-top: 18px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.44);
+}
+
+.agent-prijs-kaart {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid rgba(255, 255, 255, 0.085);
+    border-radius: 22px;
+    background: rgba(18, 18, 20, 0.46);
+}
+
+.agent-prijs-kaart::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 18%;
+    right: 18%;
+    height: 1px;
+    background: var(--glans);
+}
+
+.agent-prijs-deel {
+    min-width: 0;
+    padding: clamp(30px, 5vw, 58px);
+}
+
+.agent-prijs-deel + .agent-prijs-deel { border-left: 1px solid var(--agent-lijn); }
+
+.agent-prijs-label {
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: rgba(246, 212, 81, 0.62);
+}
+
+.agent-prijs-maand .agent-prijs-label { color: rgba(255, 255, 255, 0.38); }
+
+.agent-prijs-bedrag {
+    margin-top: 18px;
+    font-size: clamp(44px, 6vw, 70px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -2.6px;
+    color: var(--avdb-text);
+}
+
+.agent-prijs-bedrag small {
+    display: block;
+    margin-bottom: 7px;
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.agent-prijs-gebruik {
+    font-size: clamp(34px, 4.2vw, 52px);
+    line-height: 1.04;
+    letter-spacing: -1.9px;
+}
+
+.agent-prijs-meta {
+    max-width: 48ch;
+    margin-top: 18px;
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.42);
+}
+
+/* VEELGESTELDE VRAGEN — Ongewijzigd overgenomen uit websites.css. */
+
+.section-eyebrow {
+    display: block;
+    margin-bottom: 15px;
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+    color: rgba(246, 212, 81, 0.55);
+}
+
+.faq-box { width: var(--web-breed); margin: 0 auto; }
+
+.faq-kop {
+    max-width: var(--web-lees);
+    margin: 0 auto clamp(26px, 3.2vw, 40px);
+    text-align: center;
+}
+
+.faq-kop h2 {
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -1.2px;
+    color: var(--avdb-text);
+}
+
+.faq-lijst {
+    max-width: var(--web-lees);
+    margin: 0 auto;
+    border-top: 1px solid var(--web-lijn);
+}
+
+.faq-lijst details { border-bottom: 1px solid var(--web-lijn-zacht); }
+
+.faq-lijst summary {
+    position: relative;
+    padding: 22px 46px 22px 0;
+    list-style: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.76);
+    transition: color 0.2s ease, padding-left 0.32s var(--avdb-ease);
+}
+
+.faq-lijst summary::-webkit-details-marker { display: none; }
+
+/* Het streepje dat de vraag opzij duwt */
+
+.faq-lijst summary::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 1px;
+    background-color: var(--gold);
+    transform: translateY(-50%);
+    transition: width 0.32s var(--avdb-ease);
+}
+
+.faq-lijst summary::after {
+    content: "+";
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(246, 212, 81, 0.6);
+    transition: color 0.2s ease;
+}
+
+.faq-lijst summary:hover { color: white; }
+
+.faq-lijst summary:hover::before { width: 9px; }
+
+.faq-lijst details[open] summary { padding-left: 22px; color: var(--avdb-text); }
+
+.faq-lijst details[open] summary::before { width: 13px; }
+
+.faq-lijst details[open] summary::after { content: "−"; color: var(--gold); }
+
+.faq-lijst details p {
+    max-width: 60ch;
+    margin: -2px 0 24px;
+    padding-right: 46px;
+    padding-left: 22px;
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.43);
+}
+
+/* SLOT — Twee uitwegen, zonder de horizontale slotvorm van websites.html. */
+
+.agent-slot-section { padding: 0 0 clamp(84px, 10vw, 132px); }
+
+.agent-slot-box {
+    width: min(var(--agent-breed), 760px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.agent-slot-box h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -1.6px;
+    color: var(--avdb-text);
+}
+
+.agent-slot-box > p {
+    max-width: 50ch;
+    margin: 20px auto 0;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.agent-slot-acties {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.agent-slot-link {
+    position: relative;
+    min-height: var(--touch-target);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.2s ease;
+}
+
+.agent-slot-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 5px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.24);
+    transition: background-color 0.2s ease;
+}
+
+.agent-slot-link span { transition: transform 0.2s ease; }
+.agent-slot-link:hover { color: white; }
+.agent-slot-link:hover::after { background-color: var(--gold); }
+.agent-slot-link:hover span { transform: translateX(4px); }
+.agent-slot-link:focus-visible { outline: 1px solid var(--gold); outline-offset: 5px; border-radius: 2px; }
+
+/* TOETSENBORD-FOCUS */
+
+.faq-lijst summary:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 4px;
+    border-radius: 3px;
+}
+
+.faq-lijst summary:focus-visible::before { width: 9px; }
+
+/* ANIMATIE */
+
+@keyframes agent-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE — Zelfde layoutgrenzen als responsive.css. */
+
+@media (max-width: 980px) {
+
+    :root { --agent-ruimte: clamp(78px, 11vw, 122px); }
+
+    .agent-hero-copy { max-width: 860px; }
+
+    .agent-hero-copy h1 {
+        max-width: 20ch;
+        font-size: clamp(33px, 5vw, 44px);
+    }
+
+    .agent-hero-lede { max-width: 56ch; }
+}
+
+@media (max-width: 760px) {
+
+    .agent-hero-section {
+        min-height: 0;
+        padding: clamp(82px, 11vh, 112px) 0 clamp(88px, 12vh, 124px);
+    }
+
+    .agent-hero-copy { max-width: 100%; }
+
+    .agent-hero-copy h1 { max-width: 16ch; }
+
+    .agent-hero-lede { max-width: 40ch; }
+
+    .agent-demo-frame { border-radius: 19px; }
+
+    .agent-demo-vragen {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .agent-demo-pill { justify-content: center; text-align: center; }
+
+    .agent-fit-vergelijking { grid-template-columns: minmax(0, 1fr); }
+
+    .agent-fit-kolom + .agent-fit-kolom {
+        border-top: 1px solid var(--agent-lijn);
+        border-left: 0;
+    }
+
+    .agent-fit-lijst p { max-width: 52ch; }
+
+    .agent-kennis-panelen { grid-template-columns: minmax(0, 1fr); }
+    .agent-kennis-paneel + .agent-kennis-paneel {
+        border-top: 1px solid var(--agent-lijn);
+        border-left: 0;
+    }
+
+    .agent-resultaat-rij,
+    .agent-prijs-kaart { grid-template-columns: minmax(0, 1fr); }
+
+    .agent-resultaat-rij > div,
+    .agent-resultaat-rij > div + div {
+        padding: 24px 0 28px;
+        border-left: 0;
+    }
+
+    .agent-resultaat-rij > div + div { border-top: 1px solid var(--agent-lijn-zacht); }
+
+    .agent-prijs-deel + .agent-prijs-deel {
+        border-top: 1px solid var(--agent-lijn);
+        border-left: 0;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .agent-hero-copy h1 {
+        max-width: 15ch;
+        font-size: clamp(29px, 8.2vw, 38px);
+        letter-spacing: -1px;
+    }
+
+    .agent-hero-lede {
+        max-width: 34ch;
+        font-size: 15px;
+    }
+
+    .agent-hero-foot {
+        max-width: 30ch;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .agent-demo-gesprek { padding-inline: 20px; }
+    .agent-demo-vraag { max-width: 90%; }
+    .agent-demo-gesprek h2 { font-size: clamp(27px, 8vw, 36px); }
+
+    .agent-fit-intro h2,
+    .agent-kennis-intro h2,
+    .agent-resultaat-intro h2,
+    .agent-prijs-kop h2 { font-size: clamp(28px, 8vw, 38px); }
+
+    .agent-fit-kolom { padding-left: 20px; padding-right: 20px; }
+
+    .agent-prijs-bedrag { font-size: clamp(42px, 13vw, 62px); }
+    .agent-prijs-gebruik { font-size: clamp(34px, 10vw, 46px); }
+
+    .faq-lijst summary { padding-right: 38px; font-size: 14.5px; }
+    .faq-lijst details[open] summary { padding-left: 16px; }
+    .faq-lijst details p { padding-right: 20px; padding-left: 16px; }
+}
+
+@media (max-width: 430px) {
+
+    .agent-demo-pill { width: 100%; }
+
+    .agent-hero-acties .website-cta {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .agent-prijs-deel { padding: 28px 20px; }
+
+    .agent-slot-acties { align-items: stretch; flex-direction: column; gap: 12px; }
+
+    .agent-slot-acties .website-cta,
+    .agent-slot-link { width: 100%; justify-content: center; }
+
+    .agent-slot-link::after { left: 18%; right: 18%; }
+}
+
+/* RUST VOOR WIE DAAROM VRAAGT */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .js [data-onthul],
+    .js [data-onthul].in-beeld {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    .agent-demo-pill,
+    .agent-slot-link,
+    .agent-slot-link::after,
+    .agent-slot-link span,
+    .faq-lijst summary,
+    .faq-lijst summary::before,
+    .faq-lijst summary::after { transition: none; }
+
+    .agent-demo-pill:hover,
+    .agent-slot-link:hover span { transform: none; }
+}

@@ -1,0 +1,377 @@
+/* CONTACT — Gebouwd op dezelfde visuele taal als de rest van AvdB: zwart, goud, haarlijnen, veel ruimte en rustige asymmetrie. */
+
+/* PAGINATOKENS */
+
+:root {
+    --contact-breed: min(calc(100% - (2 * var(--site-gutter))), 1120px);
+    --contact-lees: 760px;
+    --contact-lijn: rgba(255, 255, 255, 0.075);
+    --contact-lijn-zacht: rgba(255, 255, 255, 0.05);
+    --contact-ruimte: clamp(96px, 12vw, 168px);
+}
+
+.contact-page,
+.contact-page button,
+.contact-page input,
+.contact-page select,
+.contact-page textarea {
+    font-family: var(--avdb-font-sans), sans-serif;
+}
+
+/* HERO */
+
+.contact-page-hero {
+    position: relative;
+    z-index: 2;
+    padding: clamp(104px, 14vh, 154px) 0 clamp(80px, 9vw, 124px);
+}
+
+.contact-page-hero-inner {
+    width: var(--contact-breed);
+    margin: 0 auto;
+}
+
+.contact-page-eyebrow {
+    display: block;
+    margin-bottom: 18px;
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+    color: rgba(246, 212, 81, 0.64);
+}
+
+.contact-page-hero h1 {
+    max-width: 14ch;
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -1.8px;
+    color: var(--avdb-text);
+}
+
+.contact-page-lede {
+    max-width: 64ch;
+    margin-top: clamp(24px, 3vw, 32px);
+    font-size: clamp(15px, 1.1vw, 16.5px);
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.52);
+}
+
+.contact-page-meta {
+    margin-top: 26px;
+    font-size: 11.5px;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    color: rgba(255, 255, 255, 0.34);
+}
+
+.contact-page-meta span {
+    margin: 0 7px;
+    color: rgba(255, 255, 255, 0.16);
+}
+
+/* HOOFDLAYOUT */
+
+.contact-page-main {
+    position: relative;
+    z-index: 2;
+    padding-bottom: var(--contact-ruimte);
+}
+
+.contact-page-grid {
+    width: var(--contact-breed);
+    margin: 0 auto;
+    padding-top: clamp(42px, 5vw, 62px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    align-items: start;
+    gap: clamp(56px, 7vw, 108px);
+    border-top: 1px solid var(--contact-lijn);
+}
+
+.contact-page-grid::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: min(36vw, 430px);
+    height: 1px;
+    margin-top: calc(clamp(42px, 5vw, 62px) * -1 - 1px);
+    background: linear-gradient(90deg, transparent, rgba(246, 212, 81, 0.18), transparent);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+/* PERSOON */
+
+.contact-person {
+    min-width: 0;
+}
+
+.contact-person-layout {
+    display: grid;
+    gap: 28px;
+}
+
+.contact-person-photo {
+    width: min(100%, 250px);
+    margin: 0;
+}
+
+.contact-person-photo img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 28px 54px -40px rgba(0, 0, 0, 0.95);
+}
+
+.contact-person-intro {
+    max-width: 34ch;
+}
+
+.contact-person-role {
+    display: block;
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 1.45px;
+    text-transform: uppercase;
+    color: rgba(246, 212, 81, 0.62);
+}
+
+.contact-person-intro p {
+    margin-top: 12px;
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.48);
+}
+
+.contact-details {
+    margin-top: 28px;
+    border-top: 1px solid var(--contact-lijn);
+}
+
+.contact-detail {
+    min-height: 54px;
+    padding: 14px 0;
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--contact-lijn-zacht);
+}
+
+.contact-detail dt {
+    font-family: var(--avdb-font-mono), monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.28);
+}
+
+.contact-detail dd {
+    min-width: 0;
+    font-size: 12.75px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.7);
+    overflow-wrap: anywhere;
+}
+
+.contact-detail a {
+    transition: color 0.2s ease;
+}
+
+.contact-detail a:hover {
+    color: var(--gold);
+}
+
+.contact-detail a:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+.contact-person-socials {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.contact-person-socials a {
+    position: relative;
+    padding-bottom: 3px;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.62);
+    transition: color 0.2s ease;
+}
+
+.contact-person-socials a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.16);
+    transition: background-color 0.2s ease;
+}
+
+.contact-person-socials a span {
+    display: inline-block;
+    margin-left: 3px;
+    transition: transform 0.2s ease;
+}
+
+.contact-person-socials a:hover {
+    color: white;
+}
+
+.contact-person-socials a:hover::after {
+    background: var(--gold);
+}
+
+.contact-person-socials a:hover span {
+    transform: translate(2px, -2px);
+}
+
+.contact-person-socials a:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 5px;
+    border-radius: 2px;
+}
+
+/* AANVRAAG — Alleen de kop boven het formulier. Het formulier zelf is een gedeeld onderdeel en staat in shared.css. */
+
+.contact-request {
+    min-width: 0;
+}
+
+.contact-request-head {
+    max-width: 620px;
+    margin-bottom: clamp(30px, 4vw, 44px);
+}
+
+.contact-request-head h2 {
+    max-width: 18ch;
+    font-size: clamp(28px, 3.4vw, 44px);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -1.35px;
+    color: var(--avdb-text);
+}
+
+.contact-request-head p {
+    max-width: 50ch;
+    margin-top: 16px;
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.44);
+}
+
+/* RESPONSIVE — PAGINASPECIFIEK */
+
+@media (min-width: 981px) {
+    .contact-person {
+        position: sticky;
+        top: 110px;
+    }
+}
+
+@media (max-width: 980px) {
+    .contact-page-hero {
+        padding-top: clamp(84px, 11vh, 120px);
+    }
+
+    .contact-page-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(54px, 8vw, 76px);
+    }
+
+    .contact-person-layout {
+        grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+        gap: clamp(28px, 5vw, 52px);
+        align-items: start;
+    }
+
+    .contact-person-photo {
+        width: 100%;
+    }
+
+    .contact-person-intro {
+        max-width: 40ch;
+    }
+
+    .contact-details {
+        margin-top: 22px;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-page-hero {
+        padding: 72px 0 70px;
+    }
+
+    .contact-page-hero h1 {
+        font-size: clamp(34px, 10vw, 44px);
+    }
+
+    .contact-page-lede {
+        font-size: 14.5px;
+        line-height: 1.75;
+    }
+
+    .contact-page-meta {
+        max-width: 34ch;
+        line-height: 1.8;
+    }
+
+    .contact-page-grid {
+        padding-top: 34px;
+        gap: 52px;
+    }
+
+    .contact-person-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .contact-person-photo {
+        width: min(100%, 190px);
+    }
+}
+
+@media (max-width: 430px) {
+    .contact-detail {
+        grid-template-columns: 68px minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .contact-person-socials {
+        gap: 14px;
+    }
+}
+
+/* RUST VOOR WIE DAAROM VRAAGT */
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-detail a,
+    .contact-person-socials a,
+    .contact-person-socials a::after,
+    .contact-person-socials a span {
+        transition: none;
+    }
+
+    .contact-person-socials a:hover span {
+        transform: none;
+    }
+}

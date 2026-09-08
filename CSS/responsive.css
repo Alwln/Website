@@ -1,0 +1,491 @@
+/* RESPONSIVE — De site-brede viewportregels staan hier. Paginaspecifieke responsive verfijningen mogen in de eigen stylesheet staan. Dit bestand wordt als laatste ingeladen en stuurt de hoofdflow. Breakpoints volgen echte layoutwissels, geen apparaatnamen: 1180  kleine laptop      — navigatie wordt compacter 980   tablet             — composities en prijzen schakelen om 760   grote telefoon     — compacte disclosure-navigatie 640   telefoon           — één rustige, gecentreerde flow 430   compacte telefoon  — acties over de volle breedte 360   smalste telefoon   — laatste inhoudelijke reducties */
+
+/* 1180 — KLEINE LAPTOPS */
+
+@media (max-width: 1180px) {
+    .navbar { gap: 22px; }
+    .navbar-logo { margin-right: 8px; }
+}
+
+/* 980 — TABLETS */
+
+@media (max-width: 980px) {
+
+    /* Contact: één duidelijke kolom */
+    .contact-box { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .contact-intro h2 { max-width: 20ch; }
+
+    /* Hero: het eerste scherm staat op zichzelf. De trustregel eindigt onderaan;
+       de live metingen beginnen pas onder de eerste viewport. */
+    .section1 { min-height: 0; padding: 0 0 clamp(64px, 9vh, 96px); }
+    .section1::before { top: 32%; right: 50%; transform: translate(50%, -50%); }
+    .landings-box {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
+        row-gap: clamp(42px, 6vh, 64px);
+    }
+
+    .landing-texts {
+        position: relative;
+        width: 100%;
+        min-height: calc(100svh - 74px);
+        padding: clamp(52px, 8vh, 82px) 0 clamp(62px, 8vh, 78px);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .landing-texts > p:not(.hero-trust) { margin-inline: auto; }
+    .button-box { justify-content: center; }
+
+    .hero-trust {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: clamp(18px, 3.5vh, 30px);
+        margin: 0 !important;
+        text-align: center;
+    }
+
+    .perf-card { width: min(100%, 460px); margin-inline: auto; }
+
+    /* Routes */
+    .routes-box { grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 5vh, 48px); }
+    .routes-head { position: static; }
+    .routes-head h2 br { display: none; }
+    .routes-head p { max-width: 44ch; }
+
+    /* Project: telefoon eerst, tekst eronder */
+    .showcase-card { grid-template-columns: minmax(0, 1fr); gap: clamp(34px, 5vh, 52px); }
+    .showcase-beeld { order: -1; }
+    .telefoon { width: min(100%, 244px); }
+    .showcase-title { max-width: 30ch; }
+    .showcase-lede,
+    .showcase-text { max-width: 46ch; }
+
+    /* Prijzen: op tablet leest iedere optie als één rustige rij */
+    .pricing-panel {
+        width: min(100%, 860px);
+        margin: 0 auto;
+        grid-template-columns: minmax(0, 1fr);
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .price-item {
+        min-height: 0;
+        padding: 28px clamp(18px, 3vw, 30px);
+        display: grid;
+        grid-template-columns: minmax(150px, 0.72fr) minmax(0, 1.28fr);
+        grid-template-areas:
+            "top description"
+            "value features"
+            "value link";
+        column-gap: clamp(28px, 5vw, 52px);
+        align-items: start;
+    }
+
+    .price-item + .price-item,
+    .price-item:nth-child(3) {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.065);
+    }
+
+    .price-topline { grid-area: top; }
+    .price-value { grid-area: value; min-height: 0; margin-top: 16px; }
+    .price-description { grid-area: description; max-width: 44ch; margin-top: 0; }
+    .price-features { grid-area: features; margin-top: 16px; }
+    .price-link { grid-area: link; margin-top: 18px; padding-top: 0; }
+
+    /* Keuzes onder elkaar */
+    .keuzes { grid-template-columns: minmax(0, 1fr); }
+    .keuze-of { justify-self: center; }
+    .keuze-text { max-width: 44ch; }
+}
+
+/* 760 — GROTE TELEFOONS — De horizontale navigatie maakt plaats voor een disclosure. */
+
+@media (max-width: 760px) {
+    :root { --nav-marge: 16px; }
+
+    /* De navigatie blijft bereikbaar tijdens het lezen. */
+    body.nav-verborgen .navbar { transform: none; }
+
+    .navbar {
+        width: min(calc(100% - (2 * var(--site-gutter))), 520px);
+        max-width: none;
+        height: auto;
+        min-height: 56px;
+        padding: 6px 7px 6px 13px;
+        justify-content: space-between;
+        gap: 14px;
+        border-radius: 18px;
+    }
+
+    .navbar-logo {
+        min-width: 0;
+        margin-right: 0;
+    }
+
+    .navbar-logo a {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 12.5px;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .nav-toggle { flex: 0 0 auto; }
+    .nav-ready .nav-toggle { display: grid !important; }
+
+    .nav-ready .nav-links {
+        position: absolute;
+        top: calc(100% + 9px);
+        right: 0;
+        width: min(280px, calc(100vw - (2 * var(--site-gutter))));
+        padding: 7px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        background-color: rgba(18, 18, 20, 0.94);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 15px;
+        backdrop-filter: var(--glas);
+        -webkit-backdrop-filter: var(--glas);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055), 0 24px 52px -26px rgba(0, 0, 0, 0.95);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-6px) scale(0.985);
+        transform-origin: top right;
+        transition: opacity 0.18s ease, transform 0.22s var(--avdb-ease), visibility 0.18s linear;
+    }
+
+    .nav-ready .nav-toggle[aria-expanded="true"] + .nav-links {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+    }
+
+    .nav-ready .Websites,
+    .nav-ready .AI-assistents,
+    .nav-ready .over-ons,
+    .nav-ready .Contact {
+        width: 100%;
+        min-height: var(--touch-target);
+        padding: 10px 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 10px;
+        white-space: nowrap;
+        font-size: 13.5px;
+        text-align: left;
+    }
+
+    .nav-ready .Websites::after,
+    .nav-ready .AI-assistents::after,
+    .nav-ready .over-ons::after { display: none; }
+
+    .nav-ready .Websites:hover,
+    .nav-ready .AI-assistents:hover,
+    .nav-ready .over-ons:hover { background-color: rgba(255, 255, 255, 0.035); }
+
+    .nav-ready .Contact {
+        margin-top: 2px;
+        background-color: rgba(246, 212, 81, 0.055);
+        border-color: rgba(246, 212, 81, 0.20);
+    }
+
+    /* Links krijgen bruikbare aanraakvlakken */
+    .werk-button,
+    .showcase-link,
+    .price-link,
+    .routes-slot a,
+    .slot-link {
+        min-height: var(--touch-target);
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Hero */
+    .landing-texts h1 br { display: none; }
+    .landing-texts h1 { letter-spacing: -1px; }
+    .button-box { gap: 18px; }
+
+    .perf-list li { font-size: 11.5px; }
+
+    .pricing-heading h2,
+    .werkwijze-intro h2 { letter-spacing: -0.8px; }
+}
+
+/* AI-orb: op touch/mobiel geen SVG-displacement; alleen een statische gloed.
+   De lichte transform-animatie van de orb zelf blijft intact. */
+@media (max-width: 760px), (pointer: coarse) {
+    .orb-aura {
+        filter: none !important;
+        animation: none !important;
+        will-change: auto !important;
+        background: radial-gradient(circle at 50% 50%,
+            rgba(246, 212, 81, 0.28) 0%,
+            rgba(246, 212, 81, 0.10) 38%,
+            transparent 72%) !important;
+    }
+}
+
+/* 640 — TELEFOONS — Eén rustige flow: koppen en acties gecentreerd, leestext links. */
+
+@media (max-width: 640px) {
+    :root { --site-gutter: clamp(18px, 5%, 24px); }
+
+    .navbar-logo img { height: 23px; }
+
+    /* Hero */
+    .section1 { padding: 0 0 clamp(62px, 10vh, 86px); }
+    .landings-box { justify-items: center; }
+    .landing-texts {
+        min-height: calc(100svh - 72px);
+        padding-top: clamp(42px, 7vh, 60px);
+        padding-bottom: clamp(58px, 9vh, 72px);
+        align-items: center;
+        text-align: center;
+    }
+
+    .landing-texts h1 {
+        max-width: 20ch;
+        font-size: clamp(28px, 8.5vw, 32px);
+        line-height: 1.1;
+        letter-spacing: -0.9px;
+    }
+
+    .landing-texts p {
+        max-width: 36ch;
+        margin-top: 18px;
+        margin-inline: auto;
+        line-height: 1.65;
+    }
+
+    .button-box { justify-content: center; }
+    .hero-trust { margin-top: 18px; }
+    .perf-card { margin-inline: auto; padding: 19px 18px; border-radius: 16px; }
+    .perf-list li { gap: 10px; }
+
+    /* Routes: kop gecentreerd, inhoud blijft rustig leesbaar */
+    .diensten-showcase { padding-top: clamp(58px, 14vw, 82px); }
+    .routes-head { text-align: center; }
+    .routes-head p { margin-inline: auto; }
+    .routes-head p br { display: none; }
+    .routes-lijst { --rail: 16px; }
+    .route { gap: 16px; padding-block: 28px; }
+    .route-over .route-tekst { padding-left: 0; }
+    .route-actie-label { display: none; }
+
+    .route-pijl {
+        flex: 0 0 auto;
+        width: var(--touch-target);
+        height: var(--touch-target);
+        font-size: 12px;
+    }
+
+    .routes-head h2,
+    .showcase-heading,
+    .showcase-title { letter-spacing: -0.8px; }
+
+    /* Project */
+    .showcase-intro { text-align: center; }
+    .showcase-intro p { margin-inline: auto; }
+    .showcase-card { padding: 24px 22px; border-radius: 16px; }
+    .showcase-topline { flex-wrap: wrap; }
+    .spec-rij { grid-template-columns: minmax(0, 1fr); gap: 7px; }
+
+    .review { gap: 10px; }
+
+    /* Prijzen: compacte losse kaarten op telefoons */
+    .pricing-panel {
+        width: min(100%, 520px);
+        gap: 12px;
+        border: 0;
+    }
+
+    .price-item,
+    .price-item + .price-item,
+    .price-item:nth-child(3) {
+        display: flex;
+        padding: 24px 22px;
+        background-color: rgba(18, 18, 20, 0.30);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 16px;
+    }
+
+    .price-value { min-height: 0; margin-top: 18px; }
+    .price-description { margin-top: 16px; }
+    .price-features { margin-top: 20px; }
+    .price-link { margin-top: 0; padding-top: 22px; }
+
+    .price-link { align-self: flex-start; }
+
+    .pricing-bottom { gap: 18px; }
+    .pricing-cta { justify-content: center; }
+
+    .pricing-notes {
+        width: min(100%, 520px);
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pricing-note { padding: 18px 18px 20px; }
+
+    /* Werkwijze */
+    .traject { --rail: 16px; --stap-pad: 30px; }
+    .stap { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .stap::before { top: calc(var(--stap-pad) + 8px); }
+    .stap:first-child::before { top: 8px; }
+    .stap-nr { font-size: 30px; letter-spacing: -1.6px; }
+    .stap-tekst { padding-top: 0; }
+
+    /* Contact: één compacte conversiesectie */
+    .contact-section {
+        margin-top: 32px;
+        margin-bottom: 64px;
+        padding-top: 38px;
+    }
+
+    .contact-box { gap: 28px; }
+    .contact-intro { text-align: center; }
+    .contact-intro h2,
+    .contact-intro > p { margin-inline: auto; }
+
+    .contact-direct {
+        width: min(100%, 380px);
+        margin-inline: auto;
+        text-align: left;
+    }
+
+    /* Het formulier regelt zijn eigen breekpunten in shared.css */
+
+}
+
+/* 430 — COMPACTE TELEFOONS */
+
+@media (max-width: 430px) {
+    :root { --nav-marge: 12px; }
+
+    .navbar { width: calc(100% - (2 * var(--site-gutter))); }
+
+    .landings-box { row-gap: 34px; }
+    .button-box { width: 100%; align-items: stretch; gap: 12px; }
+
+    .project-button,
+    .pricing-cta {
+        width: 100%;
+        min-height: 48px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .werk-button { align-self: center; }
+
+    .perf-card { padding-inline: 16px; }
+    .perf-head { gap: 7px; }
+    .perf-list li { gap: 8px; }
+
+    .routes-lijst { --rail: 14px; }
+    .route { gap: 12px; }
+
+    .showcase-card { padding-inline: 20px; }
+    .showcase-client { min-width: 0; overflow-wrap: anywhere; }
+
+    .review-bron { max-width: 100%; white-space: normal; text-align: left; }
+
+    .price-item,
+    .price-item + .price-item,
+    .price-item:nth-child(3) { padding: 22px 20px; }
+
+    .price-amount { font-size: clamp(29px, 9vw, 34px); }
+
+    .traject { --rail: 14px; padding-left: var(--rail); }
+    .stap-meta { max-width: 100%; letter-spacing: 1px; }
+
+    .keuze { padding: 22px 20px; }
+
+}
+
+/* 360 — SMALSTE TELEFOONS */
+
+@media (max-width: 360px) {
+    .navbar-logo a { max-width: 186px; font-size: 11.5px; }
+    .landing-texts h1 { font-size: 28px; }
+
+    .perf-sub { display: none; }
+    .review-sterren { letter-spacing: 5px; text-indent: 5px; }
+
+    .pricing-heading p,
+    .werkwijze-intro p { font-size: 14px; }
+}
+
+/* AANRAAKSCHERMEN */
+
+@media (pointer: coarse) {
+    .project-button,
+    .pricing-cta,
+    .showcase-link,
+    .price-link,
+    .routes-slot a { min-height: var(--touch-target); }
+}
+
+/* RUST VOOR WIE DAAROM VRAAGT */
+
+@media (prefers-reduced-motion: reduce) {
+    html::before { animation: none; }
+
+    .navbar { transition: border-color 0.35s ease-in-out; }
+    .nav-links,
+    .nav-toggle-icon span,
+    .nav-toggle-icon::before { transition: none; }
+
+    .landing-texts h1,
+    .landing-texts p,
+    .button-box,
+    .perf-card {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    .perf-dot { animation: none; }
+
+    .route,
+    .route::before,
+    .route-titel,
+    .route-pijl,
+    .route-actie-label,
+    .routes-slot a span,
+    .showcase-link::after,
+    .showcase-link span,
+    .price-item,
+    .pricing-cta,
+    .pricing-cta::before,
+    .price-link span,
+    .stap::before,
+    .stap-nr,
+    .stap-titel,
+    .stap-meta,
+    .stap-meta::before,
+    .keuze,
+    .keuze::before { transition: none; }
+
+    .route:hover .route-titel,
+    .route:hover .route-pijl,
+    .routes-slot a:hover span,
+    .showcase-link:hover span { transform: none; }
+
+    .traject::before { animation: none; transform: scaleY(1); opacity: 0.45; }
+}
