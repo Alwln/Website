@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://www.sps-official.com/sitemap.xml
