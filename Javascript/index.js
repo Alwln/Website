@@ -281,3 +281,52 @@ const PerfTaal = (function () {
     }
 
 })();
+
+
+/* =========================
+   SCROLL-CUE
+   De "scroll voor meer"-hint hoort alleen boven aan de pagina thuis.
+   Zodra er een stukje naar beneden gescrold is (bewust - een klein
+   toevallig tikje telt niet mee) fadet hij weg. Terug naar boven?
+   Dan komt hij ook weer terug.
+========================= */
+
+(function () {
+
+    "use strict";
+
+    const cue = document.querySelector(".scroll-cue");
+    if (!cue) return;
+
+    const drempel = 80; // px voordat de hint verdwijnt
+
+    let verborgen = false;
+
+    /* De intro-animatie (opkomst bij laden) houdt opacity vast zolang
+       hij als "forwards" actief blijft - zolang dat zo is, start er
+       geen mooie fade, maar een abrupte sprong. Zodra de animatie is
+       afgelopen, sluiten we hem af zodat opacity daarna via een gewone
+       transition kan verlopen. */
+
+    cue.addEventListener("animationend", function (e) {
+
+        if (e.animationName !== "landing-in") return;
+
+        cue.classList.add("scroll-cue--klaar");
+    }, { once: true });
+
+    function bijwerken() {
+
+        const moetVerborgenZijn = window.scrollY > drempel;
+
+        if (moetVerborgenZijn === verborgen) return;
+
+        verborgen = moetVerborgenZijn;
+        cue.classList.toggle("scroll-cue--verborgen", verborgen);
+    }
+
+    window.addEventListener("scroll", bijwerken, { passive: true });
+
+    bijwerken();
+
+})();
