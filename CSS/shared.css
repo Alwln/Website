@@ -1243,7 +1243,12 @@ body.nav-verborgen .navbar {
 
     .contact-field { grid-column: 1 / -1; }
     .contact-submit { justify-self: stretch; }
-    .contact-privacy { max-width: 38ch; text-align: center; }
+
+    /* max-width begrenst het blokje, maar zonder margin-inline:auto
+       bleef het (ondanks text-align:center) links binnen het formulier
+       hangen in plaats van echt te centreren. */
+    .contact-privacy { max-width: 38ch; margin-inline: auto; text-align: center; }
+
     .contact-captcha { justify-items: center; }
     .contact-captcha-uitleg { text-align: center; }
 }
